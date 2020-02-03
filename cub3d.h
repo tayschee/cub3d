@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/01/30 15:36:55 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/02/03 14:53:40 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int		main(int c, char **v);
 t_all	*initialise_struct_all();
 void	free_all(t_all *all, char *msg, int i);
 
-void	window(char *map);
-void	quit_prog(t_wdw *wdw);
-int		program(t_wdw *wdw);
+void	window(char *map, t_all *data);
+void	quit_prog(t_all *data);
+int		program(t_all *data);
 
 void	parsing(char *file_name, t_all *data);
 void	for_parsing_text(t_all *data, char *line);

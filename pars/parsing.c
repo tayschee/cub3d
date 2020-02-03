@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:04:55 by tbigot            #+#    #+#             */
-/*   Updated: 2020/02/03 13:05:13 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/02/03 14:37:55 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,13 @@ static char	*ft_strjoin_mark_free(char *s1, char *s2, char *mark)
 	char	*x;
 	char	*final;
 
-	//printf("pff\n");
 	x = ft_strjoin(s1, mark);
 	if (s1)
 	{
 		free(s1);
 		s1 = NULL;
 	}
-	//printf("tmp:%s\n", tmp);
 	final = ft_strjoin(x, s2);
-	//printf("final%s\n", final);
 	if (x)
 	{
 		free(x);
@@ -55,7 +52,6 @@ static void	parsing_map(int fd, t_all *data, char *line_pars)
 	data->tmap.map = ft_split(tmp, '/');
 	if (close(fd) < 0)
 		free_all(data, "file couldn't be closed ", 1);
-//	printf("here\n");
 	verifmap(data);
 }
 
@@ -67,21 +63,15 @@ static char *parsing_text(int fd, t_all *data)
 	(void)data;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-		printf("%s\n", line);
 		if (line[0] == '1')
 			break;
 		if (ft_strncmp(line, "\0", 1) != 0)
-		{
-			printf("parsing...|%c|\n", *line);
 			for_parsing_text(data, line);
-		}
 		free(line);
 	}
 	if (i == 0)
 		free_all(data, "Error", 1);
-	printf("break\n");
 	verif_pars(data);
-//	printf("ok\n");
 	return (line);
 }	
 

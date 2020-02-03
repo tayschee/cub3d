@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prog.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 14:21:10 by tbigot            #+#    #+#             */
-/*   Updated: 2020/02/03 14:48:51 by tbigot           ###   ########.fr       */
+/*   Created: 2019/10/10 11:48:38 by tbigot            #+#    #+#             */
+/*   Updated: 2020/01/29 10:53:07 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <string.h>
+#include <stdio.h>
+#include "libft.h"
 
-int		program(t_all *data)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int x;
-	int y;
-	int color;
+	char	*ps;
+	size_t	i;
 
-	y = 0;
-	x = 0;
-	color = data->tmap.C;
-	while (y < data->twdw.height)
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		len = 0;
+	else
+		len -= start;
+	if (!(ps = malloc(sizeof(*ps) * (len + 1))))
+		return (0);
+	i = 0;
+	while (len-- > 0 && s[start + i])
 	{
-		x = 0;
-		if (y > data->twdw.height / 2)
-			color = data->tmap.F;
-		while (x < data->twdw.width)
-		{
-			mlx_pixel_put(data->twdw.ptr, data->twdw.win, x, y, color);
-			x++;
-		}
-		y++;
+		ps[i] = s[start + i];
+		i++;
 	}
-	quit_prog(data);
-	return(0);
+	ps[i] = '\0';
+	return (ps);
 }

@@ -40,7 +40,7 @@ int		main(int c, char **v)
 		printf("map.C %d\n", data->tmap.C);
 		printf("map.map %p\n", data->tmap.map); //tpout ca*/
 		parsing(v[c - 1], data);
-		//window(v[c - 1]);
+		window(v[c - 1], data);
 		return (0);// following program
 	}
 	else

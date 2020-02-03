@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:53:48 by tbigot            #+#    #+#             */
-/*   Updated: 2020/02/03 13:04:52 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/02/03 14:39:12 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	len_map(char *line)
 	i = 0;
 	while (line && line[i])
 	{
-		printf("line[%d] = %c\n", i, line[i]);
 		if (line[i] == '1')
 			count++;
 		i++;
@@ -67,7 +66,6 @@ void	verifmap(t_all *data)
 
 	i = 0;
 	size = len_map(data->tmap.map[0]);
-	//printf("size = %d\n", size);
 	if (size < 3)
 		free_all(data, "Error5", 1);
 	validchar(data->tmap.map[0], " 1", size, data);
@@ -75,10 +73,9 @@ void	verifmap(t_all *data)
 	{ 
 		validchar(data->tmap.map[i], " 0WENS12", size, data);
 		i++;
-		printf("ok\n");
 	}
 	if (data->tchar.card == 'A')
 		free_all(data, "Error4", 1);
 	validchar(data->tmap.map[i], " 1", size, data);
-	printf("map is valid");
+	printf("map is valid\n");
 }
