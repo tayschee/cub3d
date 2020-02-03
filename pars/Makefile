@@ -1,9 +1,12 @@
-FILES = for_parsing_text.c for_parsing_map.c parsing.c
+SRCS = for_parsing_map.c for_parsing_text.c parsing.c
 
-OBJS = ${FILES:.c=.o}
+OBJS = ${SRCS:.c=.o}
 
-all : ${FILES}
+.c.o : ${SRCS}
 	gcc -c -Wall -Wextra -Werror $<
 
-clean : ${OBJS}
-	rm -f $<
+all : ${OBJS}
+
+
+clean :
+	rm -f ${OBJS}
