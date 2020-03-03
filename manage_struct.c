@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/01/30 15:33:37 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/03 16:04:11 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static t_map	initialise_struct_map()
 	map.S = NULL;
 	map.F = -1;
 	map.C = -1;
+	map.CLT = NULL;
+	map.T = NULL;
 	map.map = NULL;
 	return(map);
 }
@@ -35,10 +37,17 @@ static t_wdw	initialise_struct_wdw()
 
 	//if(!(wdw = malloc(sizeof(wdw))))
 	//	exit(1); //free_all + msg error
-	wdw.ptr = 0;
-	wdw.win = 0;
+	wdw.ptr = NULL;
+	wdw.win = NULL;
 	wdw.height = -1;
 	wdw.width = -1;
+	wdw.x = 0;
+	wdw.y = 0;
+	wdw.bpp = 32;
+	wdw.size_line = 2020; // a changer
+	wdw.end = 0;
+	wdw.img_ptr = NULL;
+	wdw.img_data = NULL;
 	return(wdw);
 }
 
@@ -48,39 +57,54 @@ static t_char	initialise_struct_char()
 
 	//if(!(charac = malloc(sizeof(charac))))
 	//	exit(1); //free_all + msg error
-	charac.card = 'A';
+	charac.view = -1;
+	charac.vvx = -1;
+	charac.vvy = -1;
+	charac.vx = -1;
+	charac.vy = -1;
 	charac.x = -1;
 	charac.y = -1;
+	charac.timer = 60;
+	charac.life = 100;
+	charac.stamina = 100;
 	return(charac);
 }
 
 t_all	*initialise_struct_all()
 {
+	t_cam	cam;
 	t_all	*all;
 
+	cam.view = -1;
+	cam.vx_cam = - 1;
+	cam.vy_cam = -1;
 	if(!(all = malloc(sizeof(t_all))))
 		exit(1); //free_all + msg error
 	all->tmap =	initialise_struct_map();
 	all->tchar = initialise_struct_char();
 	all->twdw = initialise_struct_wdw();
+	all->tcam = cam;
+	//tab_int(all->cheat, -1, 10);
+	//printf("%d\n", all->cheat[4]);
 	return (all);
 }
 
 void	free_all(t_all *all, char *msg, int i)
 {
+	(void)all;
 	if (all)
 	{
 		printf("all sera free\n");
-		
+		if (all->twdw.img_ptr)
+		{
+			printf("img_ptr %s\n", all->twdw.img_ptr);
+			mlx_destroy_image(all->twdw.ptr, all->twdw.img_ptr);
+			//printf("img_ptr %s\n", all->twdw.img_ptr);
+		}	
 		if (all->twdw.ptr)
 		{
+			mlx_destroy_window(all->twdw.ptr,all->twdw.win);
 			printf("ptr %s\n", all->twdw.ptr);
-			free(all->twdw.ptr);
-		}
-		if (all->twdw.win)
-		{
-			printf("win %s\n", all->twdw.win);
-			free(all->twdw.win);
 		}
 		if (all->tmap.NO)
 		{
@@ -102,10 +126,25 @@ void	free_all(t_all *all, char *msg, int i)
 			printf("ea %s\n", all->tmap.EA);
 			free(all->tmap.EA);
 		}
+		if (all->tmap.S)
+		{
+			printf("S %s\n", all->tmap.S);
+			free(all->tmap.S);
+		}
 		if (all->tmap.map)
 		{ 
 			printf("map : %s\n", all->tmap.map[0]);
-			free(all->tmap.map);//free char *puis char **
+			free_malloc_2d(all->tmap.map);//free char *puis char **
+		}
+		if (all->tmap.T)
+		{ 
+			printf("T : %s\n", all->tmap.T);
+			free(all->tmap.T);
+		}
+		if (all->tmap.CLT)
+		{ 
+			printf("CLT : %s\n", all->tmap.CLT);
+			free(all->tmap.CLT);
 		}
 		free(all);
 	}

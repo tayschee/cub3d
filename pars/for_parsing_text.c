@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:14:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/02/03 14:37:20 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/03 11:03:09 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static char	*path_to_text(char *line)
 void	for_parsing_text(t_all *data, char	*line)
 {
 	if(!ft_strncmp(line, "NO ", 3))
-		data->tmap.NO = path_to_text(line);	
+		data->tmap.NO = path_to_text(line);//probablement changer la text ne s'enregistre ppas comme ca	
 	else if(!ft_strncmp(line, "SO ", 3))
 		data->tmap.SO = path_to_text(line);
 	else if(!ft_strncmp(line, "WE ", 3))
@@ -93,13 +93,17 @@ void	for_parsing_text(t_all *data, char	*line)
 	else if(!ft_strncmp(line, "EA ", 3))
 		data->tmap.EA = path_to_text(line);
 	else if(!ft_strncmp(line, "R ", 2))
-		dimension_wdw(line, data);
+		dimension_wdw(line, data); // inclure un int maxx et minpour la taille de la fenetre
 	else if(!ft_strncmp(line, "S ", 2))
 		data->tmap.S = path_to_text(line);
 	else if(!ft_strncmp(line, "F ", 2))
 		data->tmap.F = color(line, data);
 	else if (!ft_strncmp(line, "C ", 2))
 		data->tmap.C = color(line, data);
+	else if (!ft_strncmp(line, "TRAP ", 5))
+		data->tmap.T = path_to_text(line);
+	else if (!ft_strncmp(line, "CLT ", 4))
+		data->tmap.CLT = path_to_text(line);	
 	else
 	{
 		free(line);

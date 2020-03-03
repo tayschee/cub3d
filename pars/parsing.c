@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:04:55 by tbigot            #+#    #+#             */
-/*   Updated: 2020/02/03 14:37:55 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/03 13:47:01 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@ static void	parsing_map(int fd, t_all *data, char *line_pars)
 	{
 		tmp = ft_strjoin_mark_free(tmp, line, "/");
 	}
+	if (line)
+		free(line);
 	data->tmap.map = ft_split(tmp, '/');
+	free(tmp);
 	if (close(fd) < 0)
 		free_all(data, "file couldn't be closed ", 1);
 	verifmap(data);
+	//while(1);
 }
 
 static char *parsing_text(int fd, t_all *data)
@@ -72,6 +76,7 @@ static char *parsing_text(int fd, t_all *data)
 	if (i == 0)
 		free_all(data, "Error", 1);
 	verif_pars(data);
+	//while(1);
 	return (line);
 }	
 
@@ -79,7 +84,6 @@ void	parsing(char *file_name, t_all *data)
 {
 	int		fd;
 
-	(void)data;
 	fd = open(file_name, O_RDONLY);
 	//parsing_text(fd, data);
 	/*printf("NO %s\n", data->tmap.NO);
