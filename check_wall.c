@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 13:00:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 16:40:31 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 17:10:46 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 char what_case(t_all *data, double x, double y)
 {
-	//printf("case : %c\n", data->tmap.map[(int)(y / DIMENSION)][(int)(x / DIMENSION)]);
-	return (data->tmap.map[(int)(y) / DIMENSION][(int)(x) / DIMENSION]);
+	return (data->tmap.map[(int)(y)][(int)(x)]);
 }
 
 int check_player_position(t_all *data, double vx, double vy) //peut eventuellement etre ameliorer en les testant pas tous et en deplacant annuant uniquement le x ou le y en fonction de l'angle et ski il y a un mur
@@ -35,7 +34,7 @@ int check_player_position(t_all *data, double vx, double vy) //peut eventuelleme
 	data->tchar.y = y;
 	data->tchar.vvx = vx;
 	data->tchar.vvy = vy;
-	printf("%f\n%f\n", data->tchar.x, data->tchar.y);
+	//printf("%f\n%f\n", data->tchar.x, data->tchar.y);
 	return (0);
 }
 

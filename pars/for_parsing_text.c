@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:14:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 11:03:09 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 15:15:11 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		verifchar(char c, char *valid)
 	return(0);
 }
 
-static void	dimension_wdw(char *line, t_all *data)
+static void	dimension_wdw(char *line, t_all *data) // tu devrais le refaire
 {
 	int i;
 
@@ -41,7 +41,7 @@ static void	dimension_wdw(char *line, t_all *data)
 	data->twdw.height = ft_atoi(&line[i]);
 }
 
-static int		color(char	*line, t_all *data)
+static int		color(char	*line, t_all *data) //tu devrais le refaire quand tu auras fini
 {
 	int i;
 	int y;

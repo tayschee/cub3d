@@ -1,4 +1,4 @@
-SRCS = for_parsing_map.c for_parsing_text.c parsing.c
+SRCS = for_parsing_map.c for_parsing_text.c parsing.c dimension.c
 
 OBJS = ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:04:55 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 13:47:01 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 15:04:12 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_strjoin_mark_free(char *s1, char *s2, char *mark)
 	return (final);
 }
 
-static void	parsing_map(int fd, t_all *data, char *line_pars)
+static void	parsing_map(int fd, t_all *data, char *line_pars) //changer le parsing
 {
 	char	*tmp;
 	char	*line;
@@ -56,7 +56,6 @@ static void	parsing_map(int fd, t_all *data, char *line_pars)
 	if (close(fd) < 0)
 		free_all(data, "file couldn't be closed ", 1);
 	verifmap(data);
-	//while(1);
 }
 
 static char *parsing_text(int fd, t_all *data)
@@ -76,7 +75,6 @@ static char *parsing_text(int fd, t_all *data)
 	if (i == 0)
 		free_all(data, "Error", 1);
 	verif_pars(data);
-	//while(1);
 	return (line);
 }	
 
@@ -85,17 +83,6 @@ void	parsing(char *file_name, t_all *data)
 	int		fd;
 
 	fd = open(file_name, O_RDONLY);
-	//parsing_text(fd, data);
-	/*printf("NO %s\n", data->tmap.NO);
-	printf("%s\n", data->tmap.NO);
-	printf("SO %s\n", data->tmap.SO);
-	printf("WE %s\n", data->tmap.WE);
-	printf("EA %s\n", data->tmap.EA);
-	printf("S %s\n", data->tmap.S);
-	printf("F %d\n", data->tmap.F);
-	printf("C %d\n", data->tmap.C);
-	printf("W %d\n", data->twdw.width);
-	printf("H %d\n", data->twdw.height);*/
-	parsing_map(fd, data, parsing_text(fd, data)); //parsing texture
+	parsing_map(fd, data, parsing_text(fd, data));
 }
 

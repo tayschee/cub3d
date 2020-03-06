@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/06 14:56:20 by tbigot            #+#    #+#             */
+/*   Updated: 2020/03/06 15:03:14 by tbigot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_argv(int c, char **v)
 {
 	if (c == 3)
 	{
-		if (ft_strncmp(v[1], "-save", 6))
+		if (!ft_strncmp(v[1], "--save", 7) || !ft_strncmp(v[1], "--demo", 7))
 			return (0);
+		if (!ft_strncmp(v[1], "--save", 7)) 		
+			return (2);
+		else
+			return (3);
 	}
-	if (c == 2 || c == 3)
-	{
-		//if (checkmap(v[m]))
+	if (c == 2)
 		return (1);
-	}
 	else
 		return (0);
 }
@@ -19,28 +32,19 @@ static int	check_argv(int c, char **v)
 
 int		main(int c, char **v)
 {
+	char	*map;
+	int		mode;
 	t_all	*data;
 
-	if (check_argv(c, v) == 1)
+	if ((mode = check_argv(c, v)) > 0)
 	{
 		data = 0;
-		data = initialise_struct_all();
-		/*printf("charac.card %c\n", data->tchar.card); //aretirer
-		printf("charac.x %d\n", data->tchar.x);
-		printf("charac.y %d\n", data->tchar.y);
-		printf("wdw.ptr %p\n", data->twdw.ptr);
-		printf("wdw.win %p\n", data->twdw.win);
-		printf("wdw.height %d\n", data->twdw.height);
-		printf("wdw.width %d\n", data->twdw.width);
-		printf("map.NO %s\n", data->tmap.NO);
-		printf("map.SO %s\n", data->tmap.SO);
-		printf("map.WE %s\n", data->tmap.NO);
-		printf("map.EA %s\n", data->tmap.SO);
-		printf("map.F %d\n", data->tmap.F);
-		printf("map.C %d\n", data->tmap.C);
-		printf("map.map %p\n", data->tmap.map); //tpout ca*/
-		parsing(v[c - 1], data);
-		window(v[c - 1], data);
+		data = initialise_struct_all(mode);
+		if (mode == 3)
+			map = "a file"; //le nom de mon premier niveau
+		map = v[c - 1];
+		parsing(map, data);
+		window(map, data);
 		return (0);// following program
 	}
 	else

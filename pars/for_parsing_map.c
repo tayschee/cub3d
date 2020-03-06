@@ -6,30 +6,11 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:53:48 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 13:37:10 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 17:44:35 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void position_player(char c, int x, int y, t_all *data)
-{
-	data->tchar.x = x * DIMENSION + DIMENSION / 2;
-	data->tchar.y = y * DIMENSION + DIMENSION / 2;
-	if (c == 'N')
-		data->tchar.view = M_PI / 2;
-	else if (c == 'S')
-		data->tchar.view = - M_PI / 2;	
-	if (c == 'W')
-		data->tchar.view = M_PI;
-	else if (c == 'E')
-		data->tchar.view = 0;
-	data->tchar.vx = cos(data->tchar.view);
-	data->tchar.vy = sin(data->tchar.view);
-	data->tchar.vvx = cos(data->tchar.view);
-	data->tchar.vy = sin(data->tchar.view); //qwa ?
-	//printf("vector : [%f][%f]\n", data->tchar.vx, data->tchar.vy); // c'est ;e bordel ?
-}
 
 static int	len_map(char *line)
 {
@@ -47,6 +28,42 @@ static int	len_map(char *line)
 	return (count);
 }
 
+static int	height_map(char **map)
+{
+	int i = 0;
+
+	while(map[i])
+		i++;
+	return (i);
+}
+
+static void position_player(char c, int x, int y, t_all *data)
+{
+	data->tchar.x = x * DIMENSION + (float)(DIMENSION * 0.5);
+	data->tchar.y = y * DIMENSION + (float)(DIMENSION * 0.5);
+	printf("data->tchar.x : %f\n", data->tchar.x);
+	printf("data->tchar.y : %f\n", data->tchar.y);
+	if (c == 'N')
+		data->tchar.view = M_PI / 2;
+	else if (c == 'S')
+		data->tchar.view = 3 * M_PI / 2;	
+	if (c == 'W')
+		data->tchar.view = M_PI;
+	else if (c == 'E')
+		data->tchar.view = 0;
+
+	/*orientation du joueur*/
+	data->tchar.vx = cos(data->tchar.view);
+	data->tchar.vy = sin(data->tchar.view);
+	
+	data->tchar.vvx = cos(data->tchar.view); //peut etre inutile
+	data->tchar.vvy = sin(data->tchar.view); //peut etre inutile
+
+	/*regard du joueur*/
+	data->tcam.view = data->tchar.view;
+	data->tcam.vx_cam = data->tchar.vx;
+	data->tcam.vy_cam = data->tchar.vy; 
+}
 
 static void		validchar(char *line, char *accept, int size, t_all *data, int y)
 {
@@ -81,22 +98,22 @@ static void		validchar(char *line, char *accept, int size, t_all *data, int y)
 void	verifmap(t_all *data)
 {
 	int i;
-	int size;
+	int size_x;
+	int size_y;
 
 	i = 0;
-	size = len_map(data->tmap.map[0]);
-	if (size < 3)
+	size_x = len_map(data->tmap.map[0]);
+	size_y = height_map(data->tmap.map);
+	if (size_x < 3 && size_y < 3)
 		free_all(data, "Error5", 1);
-	validchar(data->tmap.map[0], " 1", size, data, i);
+	validchar(data->tmap.map[0], " 1", size_x, data, i);
 	while(data->tmap.map[i + 1])
 	{ 
-		validchar(data->tmap.map[i], " 0WENS123456", size, data, i); //depend si il y a bien la texture des collectable des pieges a modifier
+		validchar(data->tmap.map[i], " 0WENS123456", size_x, data, i); //5 need collectable txt , 6 need damage txt
 		i++;
 	}
 	if (data->tchar.view == -1)
 		free_all(data, "Error4", 1);
-	validchar(data->tmap.map[i], " 1", size, data, i);
-	//while(1);
-	//
-	//printf("map is valid\n");
+	validchar(data->tmap.map[i], " 1", size_x, data, i);
+	define_dimension(data, size_x, size_y);
 }

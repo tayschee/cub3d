@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:55:26 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/02 13:33:44 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/05 18:29:09 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,15 @@ int		*long_to_ORGB(long int color)
 		sub_color = sub_color << 8;
 	}
 	return(RGB);
+}
+
+int pn(double nb)
+{
+	if (nb > 0)
+		return (1);
+	else if (nb < 0)
+		return (-1);
+	else
+		return (0);
 }
 

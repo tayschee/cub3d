@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 17:24:40 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 18:32:36 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ROTATE_RIGHT 124
 
 # define ESC 53
+# define TAB 48
+
 
 # define RED 16711680
 # define GREEN 2088960
@@ -38,12 +40,15 @@
 # define BLACK 0
 # define YELLOW 16776960
 # define GREY 13882323
+# define PURPLE 8388736
 # define TGREY 2144588755
 
-# define DIMENSION 25
-# define DIMENSION_PLAYER 4
 
-# define SPEED 2
+# define DIMENSION 1
+# define DIMENSION_PLAYER 0.2
+# define RATIO 3
+
+# define SPEED 0.1
 # define ROTATE_SPEED M_PI/12
 
 
@@ -60,6 +65,7 @@ typedef	struct		s_wdw
 	char			*img_data;
 	int				x;
 	int				y;
+	int				dim_mini;
 
 }					t_wdw;
 
@@ -86,6 +92,12 @@ typedef struct		s_camera
 
 }					t_cam;
 
+typedef struct		s_wall
+{
+	double			x;
+	double			y;
+}					t_wall;
+
 typedef	struct		s_char
 {
 	double			view;
@@ -98,6 +110,7 @@ typedef	struct		s_char
 	int				life;
 	int				timer;
 	int				stamina;
+	float			dim;
 	
 }					t_char;
 
@@ -107,15 +120,18 @@ typedef struct		s_all
 	t_char			tchar;
 	t_wdw			twdw;
 	t_cam			tcam;
+	t_wall			twall;
+	int				mode;
 	//int				cheat[10];
 }					t_all;
 
 int		main(int c, char **v);
 
-t_all	*initialise_struct_all();
+t_all	*initialise_struct_all(int mode);
 void	free_all(t_all *all, char *msg, int i);
 
 void	window(char *map, t_all *data);
+void	define_dimension(t_all *data, int map_w, int map_h);
 void	what_user_do(t_all *data);
 int		minimap(t_all *data);
 void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
@@ -135,8 +151,13 @@ int		check_player_position(t_all *data, double vx, double vy);
 
 double	pythagore(double c1, double c2);
 int		*long_to_ORGB(long int color);
+int		pn(double nb);
 
 void	event(t_all *data);
+
+void	view(t_all *data);
+double	check_horizontal(t_all *data, double x, double y, double v);
+double	check_vertical(t_all *data, double x, double y, double v);
 
 
 # endif

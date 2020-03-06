@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 16:04:11 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 16:10:48 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static t_wdw	initialise_struct_wdw()
 	wdw.end = 0;
 	wdw.img_ptr = NULL;
 	wdw.img_data = NULL;
+	wdw.dim_mini = DIMENSION;
 	return(wdw);
 }
 
@@ -67,14 +68,18 @@ static t_char	initialise_struct_char()
 	charac.timer = 60;
 	charac.life = 100;
 	charac.stamina = 100;
+	charac.dim = DIMENSION_PLAYER;
 	return(charac);
 }
 
-t_all	*initialise_struct_all()
+t_all	*initialise_struct_all(int mode)
 {
+	t_wall	wall;
 	t_cam	cam;
 	t_all	*all;
 
+	wall.x = 0;
+	wall.y = 0;
 	cam.view = -1;
 	cam.vx_cam = - 1;
 	cam.vy_cam = -1;
@@ -84,7 +89,9 @@ t_all	*initialise_struct_all()
 	all->tchar = initialise_struct_char();
 	all->twdw = initialise_struct_wdw();
 	all->tcam = cam;
-	//tab_int(all->cheat, -1, 10);
+	all->twall = wall;
+	all->mode = mode;
+	//tab_int(all->cheat, -1, 10); //pas la fois de fsire les cheatcode
 	//printf("%d\n", all->cheat[4]);
 	return (all);
 }

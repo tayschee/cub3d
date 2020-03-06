@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:28:02 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/03 14:16:11 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/06 15:37:27 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ static int		input(int keycode, t_all *data)
 		check_player_position(data, SPEED * cos(data->tchar.view + M_PI/2),
 		SPEED * sin(data->tchar.view + M_PI/2));
 	}
+	//if (keycode == TAB) /*cense afficher la minimap*/
 	if (keycode == ROTATE_RIGHT)
 		data->tchar.view += ROTATE_SPEED;
 	if (keycode == ROTATE_LEFT)
 		data->tchar.view -= ROTATE_SPEED;
 	data->tchar.vvx = cos(data->tchar.view);
 	data->tchar.vvy = sin(data->tchar.view);
+	printf("v[%f][%f]", data->tchar.vvx, data->tchar.vvy);
 	//cheat(keycode, data);
 	what_case(data, data->tchar.x, data->tchar.y);
 	return (keycode);
