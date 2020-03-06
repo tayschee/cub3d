@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dimension.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/06 15:50:20 by tbigot            #+#    #+#             */
+/*   Updated: 2020/03/06 18:32:20 by tbigot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
+
+void	define_dimension(t_all *data, int map_w, int map_h)
+{
+	int map_size;
+	int screen_size;
+
+
+	printf("size map : %d\n", data->twdw.dim_mini);
+	printf("size char : %f\n", data->tchar.dim);
+	map_size = map_w >= map_h ? map_w : map_h;
+	screen_size = data->twdw.height <= data->twdw.width
+	? data->twdw.height : data->twdw.width;
+
+	data->twdw.dim_mini *= (screen_size / 2) / map_size; //c'est ok mais pas ouf trouve une formule magique
+	printf("size map : %d\n", data->twdw.dim_mini);
+	data->tchar.dim *= data->twdw.dim_mini;
+	printf("size char : %f\n", data->tchar.dim);
+}
