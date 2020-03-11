@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 18:32:36 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/11 18:34:37 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define ESC 53
 # define TAB 48
 
-
 # define RED 16711680
 # define GREEN 2088960
 # define BLUE 255
@@ -49,7 +48,7 @@
 # define RATIO 3
 
 # define SPEED 0.1
-# define ROTATE_SPEED M_PI/12
+# define ROTATE_SPEED M_PI/192
 
 
 typedef	struct		s_wdw
@@ -63,9 +62,12 @@ typedef	struct		s_wdw
 	int				end;
 	void			*img_ptr;
 	char			*img_data;
+	void			*img_mn_ptr;
+	char			*img_mn_data;
 	int				x;
 	int				y;
 	int				dim_mini;
+	int				print_map;
 
 }					t_wdw;
 
@@ -96,6 +98,11 @@ typedef struct		s_wall
 {
 	double			x;
 	double			y;
+	double			xbis;
+	double			ybis;
+	double			hyp;
+	double			size_x;
+	double			size_y;
 }					t_wall;
 
 typedef	struct		s_char
@@ -155,9 +162,8 @@ int		pn(double nb);
 
 void	event(t_all *data);
 
-void	view(t_all *data);
-double	check_horizontal(t_all *data, double x, double y, double v);
-double	check_vertical(t_all *data, double x, double y, double v);
-
+void	view(t_all *data, double v);
+void	check_horizontal(t_all *data, double x, double y, double v);
+void	check_vertical(t_all *data, double x, double y, double v);
 
 # endif

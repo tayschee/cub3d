@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:53:48 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 17:44:35 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/10 11:27:21 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,20 @@ static void		validchar(char *line, char *accept, int size, t_all *data, int y)
 void	verifmap(t_all *data)
 {
 	int i;
-	int size_x;
-	int size_y;
 
 	i = 0;
-	size_x = len_map(data->tmap.map[0]);
-	size_y = height_map(data->tmap.map);
-	if (size_x < 3 && size_y < 3)
+	data->twall.size_x = len_map(data->tmap.map[0]);
+	data->twall.size_y = height_map(data->tmap.map);
+	if (data->twall.size_x < 3 && data->twall.size_y < 3)
 		free_all(data, "Error5", 1);
-	validchar(data->tmap.map[0], " 1", size_x, data, i);
+	validchar(data->tmap.map[0], " 1", data->twall.size_x, data, i);
 	while(data->tmap.map[i + 1])
 	{ 
-		validchar(data->tmap.map[i], " 0WENS123456", size_x, data, i); //5 need collectable txt , 6 need damage txt
+		validchar(data->tmap.map[i], " 0WENS123456", data->twall.size_x, data, i); //5 need collectable txt , 6 need damage txt
 		i++;
 	}
 	if (data->tchar.view == -1)
 		free_all(data, "Error4", 1);
-	validchar(data->tmap.map[i], " 1", size_x, data, i);
-	define_dimension(data, size_x, size_y);
+	validchar(data->tmap.map[i], " 1", data->twall.size_x, data, i);
+	define_dimension(data, data->twall.size_x, data->twall.size_y);
 }

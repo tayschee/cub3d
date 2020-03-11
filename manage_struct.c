@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 16:10:48 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/10 17:47:20 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static t_wdw	initialise_struct_wdw()
 	wdw.end = 0;
 	wdw.img_ptr = NULL;
 	wdw.img_data = NULL;
+	wdw.img_mn_ptr = NULL;
+	wdw.img_mn_data = NULL;
 	wdw.dim_mini = DIMENSION;
+	wdw.print_map = 0;
 	return(wdw);
 }
 
@@ -80,6 +83,11 @@ t_all	*initialise_struct_all(int mode)
 
 	wall.x = 0;
 	wall.y = 0;
+	wall.xbis = 0;
+	wall.ybis = 0;
+	wall.hyp = 0;
+	wall.size_x = 0;
+	wall.size_y = 0;
 	cam.view = -1;
 	cam.vx_cam = - 1;
 	cam.vy_cam = -1;
@@ -106,6 +114,12 @@ void	free_all(t_all *all, char *msg, int i)
 		{
 			printf("img_ptr %s\n", all->twdw.img_ptr);
 			mlx_destroy_image(all->twdw.ptr, all->twdw.img_ptr);
+			//printf("img_ptr %s\n", all->twdw.img_ptr);
+		}
+		if (all->twdw.img_mn_ptr)
+		{
+			printf("img_ptr %s\n", all->twdw.img_ptr);
+			mlx_destroy_image(all->twdw.ptr, all->twdw.img_mn_ptr);
 			//printf("img_ptr %s\n", all->twdw.img_ptr);
 		}	
 		if (all->twdw.ptr)
