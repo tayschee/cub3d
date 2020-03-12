@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/10 17:47:20 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 13:25:47 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_wdw	initialise_struct_wdw()
 	wdw.x = 0;
 	wdw.y = 0;
 	wdw.bpp = 32;
-	wdw.size_line = 2020; // a changer
+	wdw.size_line = 0; // a changer
 	wdw.end = 0;
 	wdw.img_ptr = NULL;
 	wdw.img_data = NULL;

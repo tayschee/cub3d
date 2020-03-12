@@ -6,7 +6,7 @@ pars = pars/
 
 l = libft/
 
-FILES = main.c window.c manage_struct.c prog.c what_user_do.c check_wall.c utils.c event.c print_view.c check_horiz_inter.c check_vert_inter.c
+FILES = main.c window.c manage_struct.c prog.c what_user_do.c check_wall.c utils.c event.c print_view.c check_horiz_inter.c check_vert_inter.c print3d.c
 
 FILESPARS = ${pars}parsing.c ${pars}for_parsing_map.c ${pars}for_parsing_text.c ${pars}dimension.c
 

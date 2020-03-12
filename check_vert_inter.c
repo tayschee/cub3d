@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:07:17 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/11 18:34:35 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 16:56:34 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void 	check_next_vert(t_all *data, int down, int right, double v)
 	float posx;
 	float posy;
 
+	printf("vv : %f\n", v);
 	x_step = DIMENSION;
 	x_step *= !right ? -1 : 1;
 	y_step = DIMENSION * tan(v);

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:55:26 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/05 18:29:09 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 14:04:35 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int		*long_to_ORGB(long int color)
 	return(RGB);
 }
 
-int pn(double nb)
+double	trigo_pi(double angle)
 {
-	if (nb > 0)
-		return (1);
-	else if (nb < 0)
-		return (-1);
-	else
-		return (0);
+	if (angle > 2 * M_PI)
+		angle = angle - 2 * M_PI;
+	if (angle < 0)
+		angle = 2 * M_PI + angle;
+	return (angle);
 }
+
 

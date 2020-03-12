@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 14:21:10 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/11 18:34:29 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 15:48:04 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,64 @@ static int *what_color(char c) /*met une couleur en fonction de ce qu'il y a sur
 	return (tab);
 }
 
-static void print_view(t_all *data, int color)
+
+void	print_view_minimap(t_all *data, double add, double v, int *color)
 {
-	double v;
 	float i;
-	float j;
+	int k;
+	int pos_view;
+
+	i = 0;
+	k = 0;
+	add -= M_PI / data->twdw.width;
+	add += M_PI / (data->twdw.dim_mini * data->twall.size_x);
+	v = trigo_pi(data->tchar.view + add);
+	while (i < data->twall.hyp * data->twdw.dim_mini)
+	{
+			//printf("i : %f\nhyp : %f\n", i, data->twall.hyp);
+			pos_view = (int)(data->tchar.x * data->twdw.dim_mini + i * cos(v)) * 4
+			+ data->twdw.size_line * (int)(data->tchar.y * data->twdw.dim_mini + i * sin(v));
+			k = 0;
+			while (k < 4)
+			{
+				data->twdw.img_mn_data[pos_view + k] = color[3 - k];
+				k++;
+			}
+			i += 5;
+	}
+}
+
+/*static void print_view(t_all *data, int *color)
+{
+	double add;
+	double v;
+//	float i;
+//	int		k;
+//	int		pos_view;
 
 	(void)color;
 	(void)data;
-	v = data->tchar.view + M_PI / 6;
-	/*un petit while pour le faire avec toute les radiant*/
-	while(v < data->tchar.view + M_PI / 6)
+	add = - M_PI / 6;
+		//un petit while pour le faire avec toute les radiant
+	while(add <= M_PI / 6)
 	{
+		v = trigo_pi(data->tchar.view + add);
+		//printf("view print : %f\n", vw);
+		//printf("v print : %f\n", v);
 		view(data, v); 
 		//printf("pyt : %f\n", pyt);
-		i = 0;
-		j = 0;
-		while (i < data->twall.hyp) //utiliser hyp struct
+		print_view_minimap(data, add, v, color);
+		while(i <= data->twall.hyp)
 		{
-			mlx_pixel_put(data->twdw.ptr, data->twdw.win, data->tchar.x * data->twdw.dim_mini + i * cos(v) * data->twdw.dim_mini,
-			data->tchar.y * data->twdw.dim_mini + j * sin(v) * data->twdw.dim_mini, color);
-			//printf("x print : %f\n", (data->tchar.x + i * data->tchar.vvx) * data->twdw.dim_mini);
-			i += 0.1; //define une vraie valeur
-			j += 0.1;
+					i += 0.1;
 		}
-		v += M_PI/192; //a modif;
+		add += M_PI / data->twdw.width;
+		//a modif;
 	}
-}
+}*/
+
+
+
 
 static void print_circle(t_all *data, int *ORGB, int ray, int dimension) /*modifier le ray en fonction de la taille*/
 {
@@ -152,8 +183,8 @@ int minimap(t_all *data)
 	}
 	print_circle(data, long_to_ORGB(GREEN), data->tchar.dim, data->twdw.dim_mini);
 	event(data);
+	view(data, data->tchar.view, long_to_ORGB(TGREY));
 	print_screen(data);
-	print_view(data, TGREY);
 	what_user_do(data);
 	return (1);
 }

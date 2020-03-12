@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:14:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 15:15:11 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 13:26:59 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	dimension_wdw(char *line, t_all *data) // tu devrais le refaire
 		i++;
 	i++;
 	data->twdw.width = ft_atoi(&line[i]);
+	data->twdw.size_line = data->twdw.width * 4;
 	while(line[i] != ' ')
 		i++;
 	i++;

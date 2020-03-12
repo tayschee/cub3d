@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/11 18:34:37 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 18:33:05 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@
 
 
 # define DIMENSION 1
+# define EYE 1 / 2
 # define DIMENSION_PLAYER 0.2
 # define RATIO 3
 
 # define SPEED 0.1
-# define ROTATE_SPEED M_PI/192
+# define ROTATE_SPEED M_PI/24
 
 
 typedef	struct		s_wdw
@@ -103,6 +104,8 @@ typedef struct		s_wall
 	double			hyp;
 	double			size_x;
 	double			size_y;
+	int				horiz;
+	double			size;
 }					t_wall;
 
 typedef	struct		s_char
@@ -141,6 +144,7 @@ void	window(char *map, t_all *data);
 void	define_dimension(t_all *data, int map_w, int map_h);
 void	what_user_do(t_all *data);
 int		minimap(t_all *data);
+void	print_view_minimap(t_all *data, double add, double v, int *color);
 void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
 
 void player_position_minimap(t_all *data);
@@ -158,12 +162,14 @@ int		check_player_position(t_all *data, double vx, double vy);
 
 double	pythagore(double c1, double c2);
 int		*long_to_ORGB(long int color);
-int		pn(double nb);
+double	trigo_pi(double angle);
 
 void	event(t_all *data);
 
-void	view(t_all *data, double v);
+void	view(t_all *data, double v, int *color);
 void	check_horizontal(t_all *data, double x, double y, double v);
 void	check_vertical(t_all *data, double x, double y, double v);
+
+void	print3d(t_all *data, int x);
 
 # endif

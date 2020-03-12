@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:05:31 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/10 17:43:24 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 14:48:22 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void 	check_next_horiz(t_all *data, int down, int right, double v)
 	float posx;
 	float posy;
 
+	//printf("vh : %f\n", v);
 	y_step = DIMENSION;
 	y_step *= down ? 1 : -1;
 	x_step = DIMENSION / tan(v);

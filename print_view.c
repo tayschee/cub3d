@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:36:06 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/11 18:34:31 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/03/12 16:47:45 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,22 @@ static void		closest_wall(t_all *data)
 	data->twall.hyp = data->twall.hyp > tmp ? tmp : data->twall.hyp;
 }
 
-void	view(t_all *data, double v)
+void	view(t_all *data, double v, int *color)
 {
-	if (fabs(sin(v)) > 0.000001)
+	int	i;
+	double add;
+
+	i = 0;
+	add = - M_PI/6;
+	while(add <= M_PI / 6)
 	{
-		printf("ok\n");
+		v = trigo_pi(data->tchar.view + add);
 		check_horizontal(data, data->tchar.x, data->tchar.y, v);
-	}
-	else
-	{
-		data->twall.y = 1000000000000000000;
-		data->twall.x = 1000000000000000000;
-	}
-	if (fabs(cos(v)) > 0.000001)
-	{
 		check_vertical(data, data->tchar.x, data->tchar.y, v);
+		closest_wall(data);
+		print3d(data, i);
+		print_view_minimap(data, add, v, color);
+		add += M_PI / data->twdw.width;
+		i++;
 	}
-	else
-	{
-		data->twall.ybis = 1000000000000000000;
-		data->twall.xbis = 1000000000000000000;
-	}
-	closest_wall(data);
-	//data->twall.hyp = pythagore(data->tchar.x - data->twall.x,
-	//data->tchar.y - data->twall.y);
-	printf("data->twall.hyp %f\n", data->twall.hyp);
 }
