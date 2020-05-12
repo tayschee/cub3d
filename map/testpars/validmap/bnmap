@@ -4,17 +4,19 @@ R 1920 1080
 
 
 
-NO ./path_to_the_north_texture
+NO /home/user42/Bureau/42/cub3d/texture/wood.xpm
 
 
 
 
 
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
 
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
+SO /home/user42/Bureau/42/cub3d/texture/redbrick.xpm
+WE /home/user42/Bureau/42/cub3d/texture/purplestone.xpm
+
+EA /home/user42/Bureau/42/cub3d/texture/colorstone.xpm
+S /home/user42/Bureau/42/cub3d/texture/pillar.xpm
+
 
 
 

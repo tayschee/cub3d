@@ -18,16 +18,26 @@ static t_map	initialise_struct_map()
 
 	//if(!(map = malloc(sizeof(map))))
 	//	exit(1); //free_all + msg error
+	map.no = NULL;
+	map.so = NULL;
+	map.we = NULL;
+	map.ea = NULL;
 	map.NO = NULL;
 	map.SO = NULL;
 	map.WE = NULL;
 	map.EA = NULL;
-	map.S = NULL;
 	map.F = -1;
 	map.C = -1;
-	map.CLT = NULL;
-	map.T = NULL;
 	map.map = NULL;
+	map.dim_no[0] = 0;
+	map.dim_no[1] = 0;
+	map.dim_so[0] = 0;
+	map.dim_so[1] = 0;
+	map.dim_we[0] = 0;
+	map.dim_we[1] = 0;
+	map.dim_ea[0] = 0;
+	map.dim_ea[1] = 0;
+
 	return(map);
 }
 
@@ -45,6 +55,10 @@ static t_wdw	initialise_struct_wdw()
 	wdw.y = 0;
 	wdw.bpp = 32;
 	wdw.size_line = 0; // a changer
+	wdw.sl_no = 0;
+	wdw.sl_so = 0;
+	wdw.sl_we = 0;
+	wdw.sl_ea = 0;
 	wdw.end = 0;
 	wdw.img_ptr = NULL;
 	wdw.img_data = NULL;
@@ -75,10 +89,33 @@ static t_char	initialise_struct_char()
 	return(charac);
 }
 
+static t_sprt	initialise_struct_sprt()
+{
+	t_sprt	sprt;
+	
+	sprt.s = NULL;
+	sprt.t = NULL;
+	sprt.c = NULL;
+	sprt.S = NULL;
+	sprt.T = NULL;
+	sprt.C = NULL;
+	sprt.sl_s = 0;
+	sprt.sl_t = 0;
+	sprt.sl_c = 0;
+	sprt.dim_s[0] = 0;
+	sprt.dim_s[1] = 0;
+	sprt.dim_t[0] = 0;
+	sprt.dim_t[1] = 0;
+	sprt.dim_c[0] = 0;
+	sprt.dim_c[1] = 0;
+	sprt.wray = NULL;
+
+	return(sprt);
+}
+
 t_all	*initialise_struct_all(int mode)
 {
 	t_wall	wall;
-	t_cam	cam;
 	t_all	*all;
 
 	wall.x = 0;
@@ -88,90 +125,22 @@ t_all	*initialise_struct_all(int mode)
 	wall.hyp = 0;
 	wall.size_x = 0;
 	wall.size_y = 0;
-	cam.view = -1;
-	cam.vx_cam = - 1;
-	cam.vy_cam = -1;
+	wall.horiz = 0;
+	wall.text = NULL;
+	wall.size_line = 0;
+	wall.width = 0;
+	wall.height = 0;
 	if(!(all = malloc(sizeof(t_all))))
 		exit(1); //free_all + msg error
 	all->tmap =	initialise_struct_map();
 	all->tchar = initialise_struct_char();
 	all->twdw = initialise_struct_wdw();
-	all->tcam = cam;
 	all->twall = wall;
+	all->tvsprt = NULL;
+	all->tsprt = initialise_struct_sprt();
 	all->mode = mode;
+	all->line = NULL;
 	//tab_int(all->cheat, -1, 10); //pas la fois de fsire les cheatcode
 	//printf("%d\n", all->cheat[4]);
 	return (all);
 }
-
-void	free_all(t_all *all, char *msg, int i)
-{
-	(void)all;
-	if (all)
-	{
-		printf("all sera free\n");
-		if (all->twdw.img_ptr)
-		{
-			printf("img_ptr %s\n", all->twdw.img_ptr);
-			mlx_destroy_image(all->twdw.ptr, all->twdw.img_ptr);
-			//printf("img_ptr %s\n", all->twdw.img_ptr);
-		}
-		if (all->twdw.img_mn_ptr)
-		{
-			printf("img_ptr %s\n", all->twdw.img_ptr);
-			mlx_destroy_image(all->twdw.ptr, all->twdw.img_mn_ptr);
-			//printf("img_ptr %s\n", all->twdw.img_ptr);
-		}	
-		if (all->twdw.ptr)
-		{
-			mlx_destroy_window(all->twdw.ptr,all->twdw.win);
-			printf("ptr %s\n", all->twdw.ptr);
-		}
-		if (all->tmap.NO)
-		{
-			printf("no %s\n", all->tmap.NO);
-			free(all->tmap.NO);
-		}
-		if (all->tmap.SO)
-		{
-			printf("so %s\n", all->tmap.SO);
-			free(all->tmap.SO);
-		}
-		if (all->tmap.WE)
-		{
-			printf("we %s\n", all->tmap.WE);
-			free(all->tmap.WE);
-		}
-		if (all->tmap.EA)
-		{
-			printf("ea %s\n", all->tmap.EA);
-			free(all->tmap.EA);
-		}
-		if (all->tmap.S)
-		{
-			printf("S %s\n", all->tmap.S);
-			free(all->tmap.S);
-		}
-		if (all->tmap.map)
-		{ 
-			printf("map : %s\n", all->tmap.map[0]);
-			free_malloc_2d(all->tmap.map);//free char *puis char **
-		}
-		if (all->tmap.T)
-		{ 
-			printf("T : %s\n", all->tmap.T);
-			free(all->tmap.T);
-		}
-		if (all->tmap.CLT)
-		{ 
-			printf("CLT : %s\n", all->tmap.CLT);
-			free(all->tmap.CLT);
-		}
-		free(all);
-	}
-	//while (1);
-	if (i == 1)
-		perror(msg);
-	exit(i);
-}
-

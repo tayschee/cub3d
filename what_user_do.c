@@ -36,6 +36,7 @@ static void		choice_screen(t_all *data, int keycode)
 
 static int		input(int keycode, t_all *data)
 {
+	printf("salut\n");
 	printf("%d\n", keycode);
 	if (keycode == ESC)
 		free_all(data, "ERROR", 0);
@@ -60,7 +61,6 @@ static int		input(int keycode, t_all *data)
 		check_player_position(data, SPEED * cos(data->tchar.view + M_PI/2),
 		SPEED * sin(data->tchar.view + M_PI/2));
 	}
-	//if (keycode == TAB) /*cense afficher la minimap*/
 	if (keycode == ROTATE_RIGHT)
 		data->tchar.view += ROTATE_SPEED;
 	if (keycode == ROTATE_LEFT)
@@ -76,13 +76,23 @@ static int		input(int keycode, t_all *data)
 
 static int		quit_mouse(t_all *data)
 {
+	printf("fine\n");
 	free_all(data, "ERROR", 0);
 	return(0);
 }
 
+static int test(int keycode, void *n)
+{
+	(void)n;
+	(void)keycode;
+	printf("salut test\n");
+	return(keycode);
+}
 void	what_user_do(t_all	*data)
 {
-	mlx_hook(data->twdw.win, 2, 0, input, data);
-	mlx_hook(data->twdw.win, 17, 0, quit_mouse, data);
+	//printf("%ld\n", (1L<<0));
+	mlx_key_hook(data->twdw.win, test, NULL);
+	mlx_hook(data->twdw.win, 2, 1L<<0, input, data);
+	mlx_hook(data->twdw.win, 17, 1, quit_mouse, data);
 }
 

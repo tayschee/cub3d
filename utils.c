@@ -53,4 +53,17 @@ double	trigo_pi(double angle)
 	return (angle);
 }
 
+int		verifchar(char c, char *valid)
+{
+	int	i;
+
+	i = 0;
+	while(valid[i])
+	{
+		if (c == valid[i])
+			return(1);
+		i++;
+	}
+	return(0);
+}
 

@@ -43,7 +43,7 @@ int		main(int c, char **v)
 		if (mode == 3)
 			map = "a file"; //le nom de mon premier niveau
 		map = v[c - 1];
-		parsing(map, data);
+		//parsing(map, data);
 		window(map, data);
 		return (0);// following program
 	}

@@ -12,20 +12,6 @@
 
 #include "../cub3d.h"
 
-int		verifchar(char c, char *valid)
-{
-	int	i;
-
-	i = 0;
-	while(valid[i])
-	{
-		if (c == valid[i])
-			return(1);
-		i++;
-	}
-	return(0);
-}
-
 static void	dimension_wdw(char *line, t_all *data) // tu devrais le refaire
 {
 	int i;
@@ -40,6 +26,11 @@ static void	dimension_wdw(char *line, t_all *data) // tu devrais le refaire
 		i++;
 	i++;
 	data->twdw.height = ft_atoi(&line[i]);
+	if (data->twdw.width < 60)
+	{
+		free(line);
+		free_all(data, "ERROR", 1);
+	}
 }
 
 static int		color(char	*line, t_all *data) //tu devrais le refaire quand tu auras fini
@@ -71,44 +62,55 @@ static int		color(char	*line, t_all *data) //tu devrais le refaire quand tu aura
 	return(x);
 }
 
-static char	*path_to_text(char *line)
+static char	*path_to_text(t_all *data, int dim[2], void *dir, int *size_line)
 {
-	int i;
+	char **text;
+	char *ret;
 
-	i = 0;
-	while (line[i] != ' ')
-		i++;
-	i++;
-	return(ft_strdup(&line[i]));
+	//printf("line : %s\n", line);
+	text = ft_split(data->line, ' ');
+//	printf("data->tmap.width : %d\n", data->tmap.width);
+	if(!(dir = mlx_xpm_file_to_image(data->twdw.ptr, text[1], &data->twall.width, &data->twall.height)))
+	{
+		free(data->line);
+		free_malloc_2d(text);
+		free_all(data, "ERROR", 1);
+	}
+//	printf("data->tmap.width 2 : %d\n", data->tmap.width);
+	free_malloc_2d(text);
+	ret = mlx_get_data_addr(dir, &data->twdw.bpp, size_line, &data->twdw.end);
+	dim[0] = data->twall.width;
+	dim[1] = data->twall.height;
+	return(ret);
 }
 
 
-void	for_parsing_text(t_all *data, char	*line)
+void	for_parsing_text(t_all *a)
 {
-	if(!ft_strncmp(line, "NO ", 3))
-		data->tmap.NO = path_to_text(line);//probablement changer la text ne s'enregistre ppas comme ca	
-	else if(!ft_strncmp(line, "SO ", 3))
-		data->tmap.SO = path_to_text(line);
-	else if(!ft_strncmp(line, "WE ", 3))
-		data->tmap.WE = path_to_text(line);
-	else if(!ft_strncmp(line, "EA ", 3))
-		data->tmap.EA = path_to_text(line);
-	else if(!ft_strncmp(line, "R ", 2))
-		dimension_wdw(line, data); // inclure un int maxx et minpour la taille de la fenetre
-	else if(!ft_strncmp(line, "S ", 2))
-		data->tmap.S = path_to_text(line);
-	else if(!ft_strncmp(line, "F ", 2))
-		data->tmap.F = color(line, data);
-	else if (!ft_strncmp(line, "C ", 2))
-		data->tmap.C = color(line, data);
-	else if (!ft_strncmp(line, "TRAP ", 5))
-		data->tmap.T = path_to_text(line);
-	else if (!ft_strncmp(line, "CLT ", 4))
-		data->tmap.CLT = path_to_text(line);	
+	if(!ft_strncmp(a->line, "NO ", 3))
+		a->tmap.NO = path_to_text(a, a->tmap.dim_no, a->tmap.no, &a->twdw.sl_no);
+	else if(!ft_strncmp(a->line, "SO ", 3))
+		a->tmap.SO = path_to_text(a, a->tmap.dim_so, a->tmap.so, &a->twdw.sl_so);
+	else if(!ft_strncmp(a->line, "WE ", 3))
+		a->tmap.WE = path_to_text(a, a->tmap.dim_we, a->tmap.we, &a->twdw.sl_we);
+	else if(!ft_strncmp(a->line, "EA ", 3))
+		a->tmap.EA = path_to_text(a, a->tmap.dim_ea, a->tmap.ea, &a->twdw.sl_ea);
+	else if(!ft_strncmp(a->line, "R ", 2))
+		dimension_wdw(a->line, a); // inclure un int maxx et minpour la taille de la fenetre
+	else if(!ft_strncmp(a->line, "F ", 2))
+		a->tmap.F = color(a->line, a);
+	else if (!ft_strncmp(a->line, "C ", 2))
+		a->tmap.C = color(a->line, a);
+	else if(!ft_strncmp(a->line, "S ", 2))
+		a->tsprt.S = path_to_text(a, a->tsprt.dim_s, a->tsprt.s, &a->tsprt.sl_s);
+	else if (!ft_strncmp(a->line, "TRAP ", 5))
+		a->tsprt.T = path_to_text(a, a->tsprt.dim_t, a->tsprt.t, &a->tsprt.sl_t);
+	else if (!ft_strncmp(a->line, "CLT ", 4))
+		a->tsprt.C = path_to_text(a, a->tsprt.dim_c, a->tsprt.c, &a->tsprt.sl_c);
 	else
 	{
-		free(line);
-		free_all(data, "ERROR2", 1);
+		free(a->line);
+		free_all(a, "ERROR2", 1);
 	}
 }
 
@@ -122,7 +124,7 @@ void	verif_pars(t_all *data)
 		free_all(data, "ERROR", 1);
 	else if(data->tmap.EA == NULL)
 		free_all(data, "ERROR", 1);
-	if(data->tmap.S == NULL)
+	if(data->tsprt.S == NULL)
 		free_all(data, "ERROR", 1);
 	else if(data->twdw.width < 0)
 		free_all(data, "ERROR", 1);

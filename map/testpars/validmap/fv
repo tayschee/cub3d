@@ -1,0 +1,18 @@
+R 500 400
+NO /home/user42/Bureau/42/cub3d/texture/mossy.xpm
+SO /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
+WE /home/user42/Bureau/42/cub3d/texture/redbrick.xpm
+EA /home/user42/Bureau/42/cub3d/texture/purplestone.xpm
+S /home/user42/Bureau/42/cub3d/texture/greenlight.xpm
+F 255,255,255
+C 225,30,0
+
+
+  111111111111111111111111111111111111111111111
+ 1      1000000000000000000000000000000000100E01
+1        11111111111111111111111111111111111111
+1        1
+1        1
+ 1      1
+  111111
+

@@ -12,28 +12,47 @@
 
 #include "../cub3d.h"
 
+
+static void	change_map(t_all *data)
+{
+	int i;
+	int size;
+	
+	size = 0;
+	i = 0;
+	while (data->tmap.map[i])
+	{
+		size = ft_strlen(data->tmap.map[i]);
+		if (size > data->twall.size_x)
+			data->twall.size_x = size;
+		i++;
+	}
+	printf("size x : %d\n", data->twall.size_x);
+	add_space(data);
+}
+
 static char	*ft_strjoin_mark_free(char *s1, char *s2, char *mark)
 {
 	char	*x;
 	char	*final;
 
-	x = ft_strjoin(s1, mark);
-	if (s1)
+	if (!ft_strncmp(s2, "", 1))
 	{
-		free(s1);
-		s1 = NULL;
+		free(s2);
+		s2 = NULL;
+		s2 = ft_strdup(" ");
 	}
+	x = ft_strjoin(s1, mark);
+	free(s1);
+	s1 = NULL;
 	final = ft_strjoin(x, s2);
 	if (x)
 	{
 		free(x);
 		x = NULL;
 	}
-	if (s2)
-	{
-		free(s2);
-		s2 = NULL;
-	}
+	free(s2);
+	s2 = NULL;
 	return (final);
 }
 
@@ -55,27 +74,34 @@ static void	parsing_map(int fd, t_all *data, char *line_pars) //changer le parsi
 	free(tmp);
 	if (close(fd) < 0)
 		free_all(data, "file couldn't be closed ", 1);
+	change_map(data);
 	verifmap(data);
 }
 
 static char *parsing_text(int fd, t_all *data)
 {
 	int	i;
-	char *line;
+	int	j;
 
-	(void)data;
-	while ((i = get_next_line(fd, &line)) > 0)
+	while ((i = get_next_line(fd, &data->line)) > 0)
 	{
-		if (line[0] == '1')
+		j = 0;
+		while (data->line[j] == ' ')
+		{
+			if (data->line[j] == '1')
+				break;
+			j++;
+		}
+		if (data->line[j] == '1')
 			break;
-		if (ft_strncmp(line, "\0", 1) != 0)
-			for_parsing_text(data, line);
-		free(line);
+		else if (ft_strncmp(data->line, "\0", 1) != 0)
+			for_parsing_text(data);
+		free(data->line);
 	}
 	if (i == 0)
 		free_all(data, "Error", 1);
 	verif_pars(data);
-	return (line);
+	return (data->line);
 }	
 
 void	parsing(char *file_name, t_all *data)

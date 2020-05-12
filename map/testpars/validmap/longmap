@@ -1,9 +1,9 @@
-R 1920 1080
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
+R 745 638
+NO /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
+SO /home/user42/Bureau/42/cub3d/texture/eagle.xpm
+WE /home/user42/Bureau/42/cub3d/texture/mossy.xpm
+EA /home/user42/Bureau/42/cub3d/texture/purplestone.xpm
+S /home/user42/Bureau/42/cub3d/sprite/pillar.xpm
 F 255,255,255
 C 225,30,0
 
@@ -14,11 +14,11 @@ C 225,30,0
 100000000000000001
 100000000000000001
 100000000000000001
-100000020200000001
-111111110111111111
-100000020200000001
 100000000000000001
-100000000000000001
+111111112111111111
+100000022200000001
+100000022200000001
+100000022200000001
 10000000N000000001
 100000000000000001
 100000000000000001

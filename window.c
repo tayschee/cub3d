@@ -18,6 +18,8 @@ void	window(char *map, t_all *data)
 
 	/*initialiser la fenetre*/
 	data->twdw.ptr = mlx_init();
+	parsing(map, data);
+	printf("data->twdw.width && data->twdw.height %d %d\n", data->twdw.width, data->twdw.height);
 	data->twdw.win = mlx_new_window(data->twdw.ptr, data->twdw.width, data->twdw.height, "Ma fenetre");
 
 	/*initialiser l'image*/
@@ -28,7 +30,7 @@ void	window(char *map, t_all *data)
 	data->twdw.img_mn_ptr = mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height); // faire calc sup
 	data->twdw.img_mn_data = mlx_get_data_addr(data->twdw.img_mn_ptr, &data->twdw.bpp,
 	&data->twdw.size_line, &data->twdw.end); 	/*mon programme*/
-	mlx_loop_hook(data->twdw.ptr, minimap, data);
+	mlx_loop_hook(data->twdw.ptr, raycasting, data);
 
 	/*refait chaque commande en boucle*/
 	mlx_loop(data->twdw.ptr);

@@ -1,9 +1,9 @@
-R 500 400
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
+R 450 300
+NO /home/user42/Bureau/42/cub3d/texture/eagle.xpm
+SO /home/user42/Bureau/42/cub3d/texture/lego_wall.xpm
+WE /home/user42/Bureau/42/cub3d/texture/lego_wall.xpm
+EA /home/user42/Bureau/42/cub3d/sprite/mario_flower.xpm
+S /home/user42/Bureau/42/cub3d/sprite/mario_flower.xpm
 F 255,255,255
 C 225,30,0
 
@@ -11,7 +11,7 @@ C 225,30,0
 111111111111111111111
 100000000100000000001
 111011110101111111111
-1N0030330100010001011
+1E0020330100010001011
 131110110101010101011
 100000000001000100011
 101111111111111111111

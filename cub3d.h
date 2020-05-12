@@ -14,8 +14,8 @@
 # define CUB3D_H
 
 # include <fcntl.h>
-# include <mlx.h>
 # include <stdio.h>
+# include <mlx.h> 
 # include <string.h>
 # include <errno.h>
 # include "./libft/libft.h" 
@@ -46,6 +46,7 @@
 # define DIMENSION 1
 # define EYE 1 / 2
 # define DIMENSION_PLAYER 0.2
+# define DIMENSION_SPRITE 0.4
 # define RATIO 3
 
 # define SPEED 0.1
@@ -69,31 +70,30 @@ typedef	struct		s_wdw
 	int				y;
 	int				dim_mini;
 	int				print_map;
-
+	int			sl_no;
+	int			sl_so;
+	int			sl_we;
+	int			sl_ea;
 }					t_wdw;
 
 typedef struct		s_map
 {
+	void			*no;
+	void			*so;
+	void			*we;
+	void			*ea;
 	char			*NO;
 	char			*SO;
 	char			*WE;
 	char			*EA;
-	char			*S;
-	char			*T;
-	char			*CLT;
 	int				F;
 	int				C;
 	char			**map;
-
+	int			dim_no[2];
+	int			dim_so[2];
+	int			dim_we[2];
+	int			dim_ea[2];
 }					t_map;
-
-typedef struct		s_camera
-{
-	double		view;
-	double		vx_cam;
-	double		vy_cam;
-
-}					t_cam;
 
 typedef struct		s_wall
 {
@@ -102,10 +102,14 @@ typedef struct		s_wall
 	double			xbis;
 	double			ybis;
 	double			hyp;
-	double			size_x;
-	double			size_y;
+	int			size_x;
+	int			size_y;
 	int				horiz;
 	double			size;
+	char			*text;
+	int			size_line;
+	int			width;
+	int			height;
 }					t_wall;
 
 typedef	struct		s_char
@@ -124,15 +128,45 @@ typedef	struct		s_char
 	
 }					t_char;
 
+typedef struct		s_sprt
+{
+	void			*s;
+	void			*t;
+	void			*c;
+	char			*S;
+	char			*T;
+	char			*C;
+	int			sl_s;
+	int			sl_t;
+	int			sl_c;
+	int			dim_s[2];
+	int			dim_t[2];
+	int			dim_c[2];
+	double			*wray;
+}			t_sprt;
+
+typedef struct		s_vsprt
+{
+	
+	int		case_x;
+	int		case_y;
+	char		c;
+	double		dist;
+	double		angle;
+	struct s_vsprt	*next;
+
+}			t_vsprt;
+
 typedef struct		s_all
 {
 	t_map			tmap;
 	t_char			tchar;
 	t_wdw			twdw;
-	t_cam			tcam;
 	t_wall			twall;
+	t_sprt			tsprt;
+	t_vsprt			*tvsprt;
+	char			*line;
 	int				mode;
-	//int				cheat[10];
 }					t_all;
 
 int		main(int c, char **v);
@@ -140,22 +174,43 @@ int		main(int c, char **v);
 t_all	*initialise_struct_all(int mode);
 void	free_all(t_all *all, char *msg, int i);
 
-void	window(char *map, t_all *data);
-void	define_dimension(t_all *data, int map_w, int map_h);
-void	what_user_do(t_all *data);
-int		minimap(t_all *data);
-void	print_view_minimap(t_all *data, double add, double v, int *color);
-void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
-
-void player_position_minimap(t_all *data);
-
 void	parsing(char *file_name, t_all *data);
-void	for_parsing_text(t_all *data, char *line);
+void	for_parsing_text(t_all *data);
 void	verifmap(t_all *data);
 void	verif_pars(t_all *data);
+void	check_void(t_all *data, int i, int j);
+void	add_space(t_all *data);
+void	define_dimension(t_all *data, int map_w, int map_h);
 
-void	cheat(int keycode, t_all *data);
-int		*tab_int(int *tab, int c, int len);
+void	window(char *map, t_all *data);
+
+int	raycasting(t_all *data);
+void	view(t_all *data, double v, int *color);
+
+void	check_horizontal(t_all *data, double x, double y, double v);
+void	check_vertical(t_all *data, double x, double y, double v);
+
+void	sprite(t_all *data, double posx, double posy, double v);
+void	closest_sprite_to_further(t_all *data);
+void	map_without_X(t_all *data);
+void	free_tvsprt(t_all *data);
+
+void	print_sprite(t_all *data);
+
+void	print3d(t_all *data, int x, double angle);
+double 	pos_text(t_all *data);
+int	apply_text(t_all *data, double proj_wall, double start_text , int y);
+
+void	print_view_minimap(t_all *data, double add, double v, int *color);
+int	minimap(t_all *data);
+
+void	what_user_do(t_all *data);
+//trier jusque la
+//void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
+
+//void player_position_minimap(t_all *data);
+
+//int		*tab_int(int *tab, int c, int len);
 
 char	what_case(t_all *data, double x, double y);
 int		check_player_position(t_all *data, double vx, double vy);
@@ -163,13 +218,11 @@ int		check_player_position(t_all *data, double vx, double vy);
 double	pythagore(double c1, double c2);
 int		*long_to_ORGB(long int color);
 double	trigo_pi(double angle);
+int	verifchar(char c, char *valid);
 
 void	event(t_all *data);
 
-void	view(t_all *data, double v, int *color);
-void	check_horizontal(t_all *data, double x, double y, double v);
-void	check_vertical(t_all *data, double x, double y, double v);
 
-void	print3d(t_all *data, int x);
+
 
 # endif

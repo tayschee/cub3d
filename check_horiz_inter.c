@@ -12,8 +12,11 @@
 
 #include "cub3d.h"
 
-static int		define_position_wall_horiz(t_all *data, float posx, float posy)
+static int		define_position_wall_horiz(t_all *data, double posx, double posy, double v)
 {
+		if (what_case(data, posx, posy) == '2' ||
+		what_case(data, posx, posy) == '4')
+			sprite(data, posx, posy, v);
 		if (what_case(data, posx, posy) == '1'
 		|| what_case(data, posx, posy) == '3')
 			return (1);
@@ -25,9 +28,9 @@ static int		define_position_wall_horiz(t_all *data, float posx, float posy)
 static void 	check_next_horiz(t_all *data, int down, int right, double v)
 {
 	int y_step;
-	float x_step;
-	float posx;
-	float posy;
+	double x_step;
+	double posx;
+	double posy;
 
 	//printf("vh : %f\n", v);
 	y_step = DIMENSION;
@@ -42,7 +45,7 @@ static void 	check_next_horiz(t_all *data, int down, int right, double v)
 	while(posx >= 0 && posx <= data->twall.size_x
 	&& posy >= 0 && posy <= data->twall.size_y)
 	{
-		if (define_position_wall_horiz(data, posx, posy))
+		if (define_position_wall_horiz(data, posx, posy, v))
 			break;
 		data->twall.x += x_step;
 		data->twall.y += y_step;
