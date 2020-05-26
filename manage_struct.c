@@ -82,10 +82,8 @@ static t_char	initialise_struct_char()
 	charac.vy = -1;
 	charac.x = -1;
 	charac.y = -1;
-	charac.timer = 60;
-	charac.life = 100;
-	charac.stamina = 100;
 	charac.dim = DIMENSION_PLAYER;
+	charac.ray = 0;
 	return(charac);
 }
 
@@ -109,6 +107,9 @@ static t_sprt	initialise_struct_sprt()
 	sprt.dim_c[0] = 0;
 	sprt.dim_c[1] = 0;
 	sprt.wray = NULL;
+	sprt.beg = -1;
+	sprt.left = 0;
+	//printf("left ms : %d\n", sprt.left);
 
 	return(sprt);
 }
@@ -130,6 +131,7 @@ t_all	*initialise_struct_all(int mode)
 	wall.size_line = 0;
 	wall.width = 0;
 	wall.height = 0;
+	wall.size = 0;
 	if(!(all = malloc(sizeof(t_all))))
 		exit(1); //free_all + msg error
 	all->tmap =	initialise_struct_map();

@@ -63,19 +63,19 @@ void		bit_map_in_fo_header(int fd, int width, int height)
 	(void)bpp;
 	(void)width;
 	(void)f_size;
-	f_size = 24 * width / 32 * 4 * height;
+	//f_size = 24 * width / 32 * 4 * height;
 	c1 = 1;
-	bpp = 24;
+	bpp = 32;
 	write_bit(fd, "(", 1, 4);/*4 : Header Size = 40 ('(' in ascci)*/
-	write_number_in_bit(fd, 1, 4);/*4 : Image Width*/
-	write_number_in_bit(fd, 1, 4);/*4 : Image Height*/
+	write_number_in_bit(fd, width, 4);/*4 : Image Width*/
+	write_number_in_bit(fd, height, 4);/*4 : Image Height*/
 	write_bit(fd, &c1, 1, 2);/*2 : Planes = 1*/
 	write_number_in_bit(fd, bpp, 2);/*2 : Bits per Pixels*/
 	write_bit(fd, NULL, 1, 4);/*4 : Compression = 0*/
 	write_number_in_bit(fd, 0, 4);/*4 : Image Size = 0*/
 	write_bit(fd, NULL, 1, 4);/*4 : Xpixel Per Meter = 0*/
 	write_bit(fd, NULL, 1, 4);/*4 : Ypixel Per Meter = 0*/
-	write_number_in_bit(fd, pow(256, 3), 4);/*4 : Total Colors*/
+	write_number_in_bit(fd, 0, 4);/*4 : Total Colors*/
 	write_bit(fd, NULL, 1, 4);/*4 : Important Colors = 0*/
 }
 
@@ -88,7 +88,7 @@ void		screen(t_all *data)
 	printf("fd : %d\n", fd);
 	bit_map_file_header(fd, data->twdw.width, data->twdw.height);
 	bit_map_in_fo_header(fd, data->twdw.width, data->twdw.height);
-	//bit_map_pixel_data(fd, data);
+	bit_map_pixel_data(fd, data);
 	close(fd);
 	free_all(data, "ERROR", 0);
 }

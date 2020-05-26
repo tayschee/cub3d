@@ -3,6 +3,8 @@
 
 static void	print_screen(t_all *data)
 {
+	if (data->mode == 2)
+		screen(data);
 	if (data->twdw.print_map == 1)
 		mlx_put_image_to_window(data->twdw.ptr, data->twdw.win, data->twdw.img_mn_ptr, 0, 0);
 	else if (data->twdw.print_map == 0)
@@ -19,6 +21,9 @@ int raycasting(t_all *data)
 	map_without_X(data);
 	free_tvsprt(data);
 	print_screen(data);
+//	print_sprite(data);
+//	map_without_X(data);
+//	free_tvsprt(data);
 	//while(1);
 	event(data);
 	what_user_do(data);

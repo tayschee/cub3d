@@ -111,19 +111,12 @@ static int	draw_wall(t_all *data, double proj_wall, int x, int i)
 	int pos_on_text;
 	int k;
 	int j;
-	//int ORGB[4] = {0, 255, 255, 255};
-	//int t = 2147483647;
 
-	(void)pos_on_text;
 	j = 0;
-	//if (proj_wall > data->twdw.height - i)
-	//	proj_wall = data->twdw.height - i;
 	while(j < proj_wall && i + j < data->twdw.height)
 	{
 		pos_on_img = x * 4 + data->twdw.size_line * (i + j);
 		pos_on_text = apply_text(data, proj_wall, pos_text(data), j);
-	//	mlx_pixel_put(data->twdw.ptr, data->twdw.win, x, i + j, 255);
-	//	wait(&t);
 		k = 0;
 		while (k < 4)
 		{

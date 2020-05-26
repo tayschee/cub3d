@@ -16,12 +16,12 @@ static int	check_argv(int c, char **v)
 {
 	if (c == 3)
 	{
-		if (!ft_strncmp(v[1], "--save", 7) || !ft_strncmp(v[1], "--demo", 7))
-			return (0);
 		if (!ft_strncmp(v[1], "--save", 7)) 		
 			return (2);
-		else
+		else if (!ft_strncmp(v[1], "--demo", 7))	
 			return (3);
+		else
+			return (0);
 	}
 	if (c == 2)
 		return (1);

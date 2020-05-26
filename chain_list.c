@@ -63,8 +63,8 @@ void		map_without_X(t_all *data)
 		//printf("data->tsprite->c %c\n", data->tsprite->c);
 		//printf("data->tsprite->x %d\n", data->tsprite->case_x);
 		//printf("data->tsprite->y %d\n", data->tsprite->case_y);
-		data->tmap.map[data->tvsprt->case_y]
-		[data->tvsprt->case_x] = data->tvsprt->c;
+		data->tmap.map[(int)data->tvsprt->y]
+		[(int)data->tvsprt->x] = data->tvsprt->c;
 		data->tvsprt = data->tvsprt->next;
 	}
 	i = 0;
@@ -140,13 +140,11 @@ void		free_tvsprt(t_all *data)
 	//printf("salut\n");
 }
 
-void sprite(t_all *data, double posx, double posy, double v)
+void sprite(t_all *data, int posx, int posy, double v)
 {
 	t_vsprt		*save;
 	t_vsprt		*new;
 	t_vsprt		*sprt;
-	double		dist_x;
-	double		dist_y;
 
 
 	printf("hello\n");
@@ -155,17 +153,17 @@ void sprite(t_all *data, double posx, double posy, double v)
 	printf("data->tvsprt %p\n", data->tvsprt);
 	if (!(new = malloc(sizeof(t_vsprt))))
 		free_all(data, "ERROR", 1);
-	new->case_x = posx / DIMENSION;
-	new->case_y = posy / DIMENSION;
-	//printf("new->case_x : %d\n", new->case_x);
-	//printf("new->case_y : %d\n", new->case_y);
-	dist_x = (posx + DIMENSION / 2) - data->tchar.x;
-	dist_y = (posy + DIMENSION / 2) - data->tchar.y;
+	new->x = posx / DIMENSION + (double)(DIMENSION) / 2;
+	new->y = (int)(posy / DIMENSION) + (double)(DIMENSION)/2;
+	printf("new->case_x : %f\n", new->x);
+	printf("new->case_y : %f\n", new->y);
+	new->dist_x = data->tchar.x - new->x;
+	new->dist_y = data->tchar.y - new->y;
 	//printf("hello\n");
-	new->c = data->tmap.map[new->case_y][new->case_x];
+	new->c = data->tmap.map[(int)new->y][(int)new->x];
 	//printf("c : %c\n", new->c);
-	data->tmap.map[new->case_y][new->case_x] = 'X';
-	new->dist = pythagore(dist_x, dist_y);
+	data->tmap.map[(int)new->y][(int)new->x] = 'X';
+	new->dist = pythagore(new->dist_x, new->dist_y); //* cos (v - data->tchar.view);
 	new->angle = v;
 	new->next = NULL;
 //	printf("seems ok\n");

@@ -3,16 +3,16 @@ NO /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
 SO /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
 WE /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
 EA /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
-S /home/user42/Bureau/42/cub3d/texture/bluestone.xpm
+S /home/user42/Bureau/42/cub3d/sprite/mario_flower.xpm
 F 255,255,255
 C 225,30,0
 
 
 111111111111111111
-122222222222222221
-122222222224222241
-100000000E00000001
+100000000000000001
+100000000200000001
+100000000N00000001
 100000000100000001
-122222222222222221
-122222222222222221
+100000000000000001
+100000000000000001
 111111111111111111

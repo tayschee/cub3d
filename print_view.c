@@ -43,13 +43,14 @@ void	view(t_all *data, double v, int *color)
 	i = 0;
 	add = - M_PI/6;
 	if (!(data->tsprt.wray =
-	malloc(sizeof(double) * data->twdw.width + 1)))
+	malloc(sizeof(double) * data->twdw.width)))
 		free_all(data, "ERROR", 1);
 	/*if (!(ray[1] = ft_calloc(sizeof(char) * data->twdw.width + 1)))
 		free_all(data, "ERROR", 1);*/
-	while(add <= M_PI / 6)
+	while(i < data->twdw.width)
 	{
 		v = trigo_pi(data->tchar.view + add);
+		data->tchar.ray = v;
 		check_horizontal(data, data->tchar.x, data->tchar.y, v);
 		check_vertical(data, data->tchar.x, data->tchar.y, v);
 		data->twall.horiz = closest_wall(data);

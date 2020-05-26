@@ -46,7 +46,7 @@
 # define DIMENSION 1
 # define EYE 1 / 2
 # define DIMENSION_PLAYER 0.2
-# define DIMENSION_SPRITE 0.4
+# define DIMENSION_SPRITE 1
 # define RATIO 3
 
 # define SPEED 0.1
@@ -121,10 +121,8 @@ typedef	struct		s_char
 	double			vy;
 	double			x;
 	double			y;
-	int				life;
-	int				timer;
-	int				stamina;
 	float			dim;
+	double			ray;
 	
 }					t_char;
 
@@ -142,14 +140,18 @@ typedef struct		s_sprt
 	int			dim_s[2];
 	int			dim_t[2];
 	int			dim_c[2];
+	int			beg;
 	double			*wray;
+	int			left;
 }			t_sprt;
 
 typedef struct		s_vsprt
 {
 	
-	int		case_x;
-	int		case_y;
+	double		x;
+	double		y;
+	double		dist_x;
+	double		dist_y;
 	char		c;
 	double		dist;
 	double		angle;
@@ -190,7 +192,7 @@ void	view(t_all *data, double v, int *color);
 void	check_horizontal(t_all *data, double x, double y, double v);
 void	check_vertical(t_all *data, double x, double y, double v);
 
-void	sprite(t_all *data, double posx, double posy, double v);
+void	sprite(t_all *data, int posx, int posy, double v);
 void	closest_sprite_to_further(t_all *data);
 void	map_without_X(t_all *data);
 void	free_tvsprt(t_all *data);
@@ -212,6 +214,8 @@ void	what_user_do(t_all *data);
 
 //int		*tab_int(int *tab, int c, int len);
 
+void	screen(t_all *data);
+void	bit_map_pixel_data(int fd, t_all *data);
 char	what_case(t_all *data, double x, double y);
 int		check_player_position(t_all *data, double vx, double vy);
 

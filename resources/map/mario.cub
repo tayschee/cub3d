@@ -1,0 +1,26 @@
+R 450 300
+NO /home/user42/Bureau/42/cub3d/resources/texture/coin_block.xpm
+SO /home/user42/Bureau/42/cub3d/resources/texture/coin_block.xpm
+WE /home/user42/Bureau/42/cub3d/resources/texture/coin_block.xpm
+EA /home/user42/Bureau/42/cub3d/resources/texture/coin_block.xpm
+S /home/user42/Bureau/42/cub3d/resources/sprite/piranha_plant.xpm
+F 255,255,255
+C 225,30,0
+
+1               1
+11             11
+101           101
+1011         1001
+10101       10001
+101001     100001
+1010001   1200001
+10111111 11110201
+100000001020020201
+100010000E0010001
+10001100002110001
+10001 10001 10001
+10001  101  10001
+10001   1   10001
+10001       10001
+12221       12221
+11111       11111

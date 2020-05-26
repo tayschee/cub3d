@@ -76,7 +76,7 @@ void	free_all(t_all *all, char *msg, int i)
 			free_tvsprt(all);		
 		free(all);
 	}
-//	while (1);
+	while (1);
 	if (i == 1)
 		perror(msg);
 	exit(i);
