@@ -12,12 +12,11 @@
 
 #include "../cub3d.h"
 
-
 static void	change_map(t_all *data)
 {
-	int i;
-	int size;
-	
+	int	i;
+	int	size;
+
 	size = 0;
 	i = 0;
 	while (data->tmap.map[i])
@@ -27,7 +26,6 @@ static void	change_map(t_all *data)
 			data->twall.size_x = size;
 		i++;
 	}
-	printf("size x : %d\n", data->twall.size_x);
 	add_space(data);
 }
 
@@ -56,7 +54,7 @@ static char	*ft_strjoin_mark_free(char *s1, char *s2, char *mark)
 	return (final);
 }
 
-static void	parsing_map(int fd, t_all *data, char *line_pars) //changer le parsing
+static void	pars_map(int fd, t_all *data, char *line_pars)
 {
 	char	*tmp;
 	char	*line;
@@ -78,7 +76,7 @@ static void	parsing_map(int fd, t_all *data, char *line_pars) //changer le parsi
 	verifmap(data);
 }
 
-static char *parsing_text(int fd, t_all *data)
+static char	*parsing_text(int fd, t_all *data)
 {
 	int	i;
 	int	j;
@@ -89,11 +87,11 @@ static char *parsing_text(int fd, t_all *data)
 		while (data->line[j] == ' ')
 		{
 			if (data->line[j] == '1')
-				break;
+				break ;
 			j++;
 		}
 		if (data->line[j] == '1')
-			break;
+			break ;
 		else if (ft_strncmp(data->line, "\0", 1) != 0)
 			for_parsing_text(data);
 		free(data->line);
@@ -102,13 +100,12 @@ static char *parsing_text(int fd, t_all *data)
 		free_all(data, "Error", 1);
 	verif_pars(data);
 	return (data->line);
-}	
+}
 
-void	parsing(char *file_name, t_all *data)
+void		parsing(char *file_name, t_all *data)
 {
 	int		fd;
 
 	fd = open(file_name, O_RDONLY);
-	parsing_map(fd, data, parsing_text(fd, data));
+	pars_map(fd, data, parsing_text(fd, data));
 }
-

@@ -2,7 +2,7 @@ EXEC = Cub3D
 
 NAME = cub3d.a
 
-MLX = mlx/libmlx_Linux.a
+MLX = libmlx_Linux.a
 
 pars = pars/
 
@@ -28,7 +28,7 @@ $(NAME) : $(OBJS)
 	ar rc $(NAME) $(OBJS) $(OBJSLIBFT) $(OBJSPARS)
 	ranlib $(NAME)
 	#gcc -o $(EXEC) main.o $(NAME) $(MLX)
-	gcc -o $(EXEC) main.o $(NAME) $(MLX) -lmlx -lm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd
+	gcc -o $(EXEC) main.o $(NAME) -L/usr/local/include -lmlx -lm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd
 
 
 

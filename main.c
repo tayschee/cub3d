@@ -16,10 +16,8 @@ static int	check_argv(int c, char **v)
 {
 	if (c == 3)
 	{
-		if (!ft_strncmp(v[1], "--save", 7)) 		
+		if (!ft_strncmp(v[1], "--save", 7))
 			return (2);
-		else if (!ft_strncmp(v[1], "--demo", 7))	
-			return (3);
 		else
 			return (0);
 	}
@@ -29,8 +27,7 @@ static int	check_argv(int c, char **v)
 		return (0);
 }
 
-
-int		main(int c, char **v)
+int			main(int c, char **v)
 {
 	char	*map;
 	int		mode;
@@ -40,18 +37,14 @@ int		main(int c, char **v)
 	{
 		data = 0;
 		data = initialise_struct_all(mode);
-		if (mode == 3)
-			map = "a file"; //le nom de mon premier niveau
 		map = v[c - 1];
-		//parsing(map, data);
 		window(map, data);
-		return (0);// following program
+		return (0);
 	}
 	else
 	{
+		write(2, "ERROR\n", 6);
 		return (1);
-		//message erreur
-		//return 1
 	}
 	return (0);
 }

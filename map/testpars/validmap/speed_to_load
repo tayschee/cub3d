@@ -3,15 +3,15 @@ NO /home/user42/Bureau/42/cub3d/texture/eagle.xpm
 SO /home/user42/Bureau/42/cub3d/texture/eagle.xpm
 WE /home/user42/Bureau/42/cub3d/texture/eagle.xpm
 EA /home/user42/Bureau/42/cub3d/texture/eagle.xpm
-S /home/user42/Bureau/42/cub3d/texture/eagle.xpm
+S /home/user42/Bureau/42/cub3d/sprite/greenlight.xpm
 F 0,125,122
 C 0,0,255
 
 11111111111111111111
 10000000000000000001
 10000000000000000001
-10S00000000000000001
-10000000000000000001
+10E00000000000000001
+10000100002000000001
 10000000000000000001
 10000000000000000001
 11011000000000000001

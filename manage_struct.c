@@ -12,12 +12,10 @@
 
 #include "cub3d.h"
 
-static t_map	initialise_struct_map()
+static t_map	initialise_struct_map(void)
 {
-	t_map map;
+	t_map	map;
 
-	//if(!(map = malloc(sizeof(map))))
-	//	exit(1); //free_all + msg error
 	map.no = NULL;
 	map.so = NULL;
 	map.we = NULL;
@@ -37,16 +35,13 @@ static t_map	initialise_struct_map()
 	map.dim_we[1] = 0;
 	map.dim_ea[0] = 0;
 	map.dim_ea[1] = 0;
-
-	return(map);
+	return (map);
 }
 
-static t_wdw	initialise_struct_wdw()
+static t_wdw	initialise_struct_wdw(void)
 {
-	t_wdw wdw;
+	t_wdw	wdw;
 
-	//if(!(wdw = malloc(sizeof(wdw))))
-	//	exit(1); //free_all + msg error
 	wdw.ptr = NULL;
 	wdw.win = NULL;
 	wdw.height = -1;
@@ -54,7 +49,7 @@ static t_wdw	initialise_struct_wdw()
 	wdw.x = 0;
 	wdw.y = 0;
 	wdw.bpp = 32;
-	wdw.size_line = 0; // a changer
+	wdw.size_line = 0;
 	wdw.sl_no = 0;
 	wdw.sl_so = 0;
 	wdw.sl_we = 0;
@@ -66,15 +61,13 @@ static t_wdw	initialise_struct_wdw()
 	wdw.img_mn_data = NULL;
 	wdw.dim_mini = DIMENSION;
 	wdw.print_map = 0;
-	return(wdw);
+	return (wdw);
 }
 
-static t_char	initialise_struct_char()
+static t_char	initialise_struct_char(void)
 {
-	t_char charac;
+	t_char	charac;
 
-	//if(!(charac = malloc(sizeof(charac))))
-	//	exit(1); //free_all + msg error
 	charac.view = -1;
 	charac.vvx = -1;
 	charac.vvy = -1;
@@ -84,13 +77,13 @@ static t_char	initialise_struct_char()
 	charac.y = -1;
 	charac.dim = DIMENSION_PLAYER;
 	charac.ray = 0;
-	return(charac);
+	return (charac);
 }
 
-static t_sprt	initialise_struct_sprt()
+static t_sprt	initialise_struct_sprt(void)
 {
 	t_sprt	sprt;
-	
+
 	sprt.s = NULL;
 	sprt.t = NULL;
 	sprt.c = NULL;
@@ -109,40 +102,34 @@ static t_sprt	initialise_struct_sprt()
 	sprt.wray = NULL;
 	sprt.beg = -1;
 	sprt.left = 0;
-	//printf("left ms : %d\n", sprt.left);
-
-	return(sprt);
+	return (sprt);
 }
 
-t_all	*initialise_struct_all(int mode)
+t_all			*initialise_struct_all(int mode)
 {
-	t_wall	wall;
 	t_all	*all;
 
-	wall.x = 0;
-	wall.y = 0;
-	wall.xbis = 0;
-	wall.ybis = 0;
-	wall.hyp = 0;
-	wall.size_x = 0;
-	wall.size_y = 0;
-	wall.horiz = 0;
-	wall.text = NULL;
-	wall.size_line = 0;
-	wall.width = 0;
-	wall.height = 0;
-	wall.size = 0;
-	if(!(all = malloc(sizeof(t_all))))
-		exit(1); //free_all + msg error
-	all->tmap =	initialise_struct_map();
+	if (!(all = malloc(sizeof(t_all))))
+		exit(1);
+	all->tmap = initialise_struct_map();
 	all->tchar = initialise_struct_char();
 	all->twdw = initialise_struct_wdw();
-	all->twall = wall;
 	all->tvsprt = NULL;
 	all->tsprt = initialise_struct_sprt();
 	all->mode = mode;
 	all->line = NULL;
-	//tab_int(all->cheat, -1, 10); //pas la fois de fsire les cheatcode
-	//printf("%d\n", all->cheat[4]);
+	all->twall.x = 0;
+	all->twall.y = 0;
+	all->twall.xbis = 0;
+	all->twall.ybis = 0;
+	all->twall.hyp = 0;
+	all->twall.size_x = 0;
+	all->twall.size_y = 0;
+	all->twall.horiz = 0;
+	all->twall.text = NULL;
+	all->twall.size_line = 0;
+	all->twall.width = 0;
+	all->twall.height = 0;
+	all->twall.size = 0;
 	return (all);
 }

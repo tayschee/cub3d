@@ -194,7 +194,7 @@ void	check_vertical(t_all *data, double x, double y, double v);
 
 void	sprite(t_all *data, int posx, int posy, double v);
 void	closest_sprite_to_further(t_all *data);
-void	map_without_X(t_all *data);
+void	map_without_x(t_all *data);
 void	free_tvsprt(t_all *data);
 
 void	print_sprite(t_all *data);
@@ -220,12 +220,11 @@ char	what_case(t_all *data, double x, double y);
 int		check_player_position(t_all *data, double vx, double vy);
 
 double	pythagore(double c1, double c2);
-int		*long_to_ORGB(long int color);
+int		*long_to_orgb(long int color);
 double	trigo_pi(double angle);
 int	verifchar(char c, char *valid);
 
 void	event(t_all *data);
-
 
 
 

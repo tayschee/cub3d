@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pixel_bmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/27 12:28:23 by tbigot            #+#    #+#             */
+/*   Updated: 2020/05/27 12:28:28 by tbigot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	bit_map_pixel_data(int fd, t_all *data)
@@ -6,29 +18,17 @@ void	bit_map_pixel_data(int fd, t_all *data)
 	int x;
 	int y;
 	int k;
-	char c0 = 0;
-	char c2 = 255;
 
 	y = data->twdw.height - 1;
-	(void)pos_on_img;
-	(void)c0;
-	(void)fd;
-	(void)c2;
-	while(y >= 0)
+	while (y >= 0)
 	{
 		x = 0;
 		while (x < data->twdw.width)
 		{
 			pos_on_img = x * 4 + y * data->twdw.size_line;
 			k = 0;
-			while(k < 4)
+			while (k < 4)
 			{
-			//	if(k == 2)
-			//		write(fd, &c0, 1);
-			//	else
-			//		write(fd, &c2, 1);
-
-			//	printf("k = %d\n", k);
 				write(fd,
 				&data->twdw.img_data[pos_on_img + k], 1);
 				k++;
