@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/12 18:33:05 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 19:41:34 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,17 +129,9 @@ typedef	struct		s_char
 typedef struct		s_sprt
 {
 	void			*s;
-	void			*t;
-	void			*c;
-	char			*S;
-	char			*T;
-	char			*C;
+	char			*sc;
 	int			sl_s;
-	int			sl_t;
-	int			sl_c;
 	int			dim_s[2];
-	int			dim_t[2];
-	int			dim_c[2];
 	int			beg;
 	double			*wray;
 	int			left;

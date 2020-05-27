@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/12 13:25:47 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 19:44:17 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,10 @@ static t_sprt	initialise_struct_sprt(void)
 	t_sprt	sprt;
 
 	sprt.s = NULL;
-	sprt.t = NULL;
-	sprt.c = NULL;
-	sprt.S = NULL;
-	sprt.T = NULL;
-	sprt.C = NULL;
+	sprt.sc = NULL;
 	sprt.sl_s = 0;
-	sprt.sl_t = 0;
-	sprt.sl_c = 0;
 	sprt.dim_s[0] = 0;
 	sprt.dim_s[1] = 0;
-	sprt.dim_t[0] = 0;
-	sprt.dim_t[1] = 0;
-	sprt.dim_c[0] = 0;
-	sprt.dim_c[1] = 0;
 	sprt.wray = NULL;
 	sprt.beg = -1;
 	sprt.left = 0;

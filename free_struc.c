@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:27:58 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 12:28:01 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 19:53:39 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ void	free_all(t_all *all, char *msg, int i)
 			mlx_destroy_image(all->twdw.ptr, all->tsprt.s);
 		if (all->tmap.map)
 			free_malloc_2d(all->tmap.map);
-		if (all->tsprt.t)
-			mlx_destroy_image(all->twdw.ptr, all->tsprt.t);
-		if (all->tsprt.c)
-			mlx_destroy_image(all->twdw.ptr, all->tsprt.c);
 		if (all->tsprt.wray)
 			free(all->tsprt.wray);
 		if (all->tvsprt)

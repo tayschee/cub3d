@@ -6,23 +6,36 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:56:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 15:03:14 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 21:53:21 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	verif_file_cub(char *txt, int ret)
+{
+	int	i;
+
+	i = ft_strlen(txt);
+	if (i > 4)
+	{
+		if (!ft_strncmp(&txt[i - 4], ".cub", 5))
+			return (ret);
+	}
+	return (0);
+}
 
 static int	check_argv(int c, char **v)
 {
 	if (c == 3)
 	{
 		if (!ft_strncmp(v[1], "--save", 7))
-			return (2);
+			return (verif_file_cub(v[2], 2));
 		else
 			return (0);
 	}
 	if (c == 2)
-		return (1);
+		return (verif_file_cub(v[1], 1));
 	else
 		return (0);
 }

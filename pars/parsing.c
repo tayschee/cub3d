@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:04:55 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/06 15:04:12 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 20:02:46 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	pars_map(int fd, t_all *data, char *line_pars)
 	data->tmap.map = ft_split(tmp, '/');
 	free(tmp);
 	if (close(fd) < 0)
-		free_all(data, "file couldn't be closed ", 1);
+		free_all(data, "ERROR\n", 1);
 	change_map(data);
 	verifmap(data);
 }
@@ -97,7 +97,7 @@ static char	*parsing_text(int fd, t_all *data)
 		free(data->line);
 	}
 	if (i == 0)
-		free_all(data, "Error", 1);
+		free_all(data, "ERROR\n", 1);
 	verif_pars(data);
 	return (data->line);
 }

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:28:02 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 13:39:22 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 21:15:51 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,8 @@ static int		quit_mouse(t_all *data)
 	return (0);
 }
 
-static int test(int keycode, void *n)
-{
-	(void)n;
-	(void)keycode;
-	printf("salut test\n");
-	return(keycode);
-}
-
 void			what_user_do(t_all	*data)
 {
-	printf("coucou\n");
-	mlx_key_hook(data->twdw.ptr, test, NULL);
 	mlx_hook(data->twdw.win, 2, 1L << 0, input, data);
-	mlx_hook(data->twdw.win, 17, 1, quit_mouse, data);
+	mlx_hook(data->twdw.win, 17, 1L << 0, quit_mouse, data);
 }

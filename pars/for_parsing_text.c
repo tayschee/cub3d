@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:14:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/12 13:26:59 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 20:19:06 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ static void		dimension_wdw(char *line, t_all *data)
 		data->twdw.size_line = data->twdw.width * 4;
 	}
 	free_malloc_2d(txt);
-	if (data->twdw.width < 60 || i != 3)
-	{
-		free(line);
-		free_all(data, "ERROR", 1);
-	}
+	if (data->twdw.width >= 60)
+		return ;
+	free(line);
+	free_all(data, "ERROR\n", 1);
 }
 
 static int		color(char	*line, t_all *data) //a refaire ou texture sol ciel
@@ -60,7 +59,7 @@ static int		color(char	*line, t_all *data) //a refaire ou texture sol ciel
 		if (y > 255)
 		{
 			free(line);
-			free_all(data, "ERROR1", 1);
+			free_all(data, "ERROR\n", 1);
 		}
 		x += y;
 		while (verifchar(line[i], "0123456789") && line[i])
@@ -83,7 +82,7 @@ int dim[2], void *dir, int *size_line) //verif .cub
 	{
 		free(data->line);
 		free_malloc_2d(text);
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	}
 	free_malloc_2d(text);
 	ret = mlx_get_data_addr(dir, &data->twdw.bpp, size_line, &data->twdw.end);
@@ -103,42 +102,42 @@ void			for_parsing_text(t_all *a)
 	else if (!ft_strncmp(a->line, "EA ", 3))
 		a->tmap.EA = path_text(a, a->tmap.dim_ea, a->tmap.ea, &a->twdw.sl_ea);
 	else if (!ft_strncmp(a->line, "R ", 2))
+	{	
 		dimension_wdw(a->line, a);
+		if (!(a->tsprt.wray = malloc(sizeof(double) * a->twdw.width)))
+			free_all(a, "ERROR\n", 1);
+	}
 	else if (!ft_strncmp(a->line, "F ", 2))
 		a->tmap.F = color(a->line, a);
 	else if (!ft_strncmp(a->line, "C ", 2))
 		a->tmap.C = color(a->line, a);
 	else if (!ft_strncmp(a->line, "S ", 2))
-		a->tsprt.S = path_text(a, a->tsprt.dim_s, a->tsprt.s, &a->tsprt.sl_s);
-	else if (!ft_strncmp(a->line, "TRAP ", 5))
-		a->tsprt.T = path_text(a, a->tsprt.dim_t, a->tsprt.t, &a->tsprt.sl_t);
-	else if (!ft_strncmp(a->line, "CLT ", 4))
-		a->tsprt.C = path_text(a, a->tsprt.dim_c, a->tsprt.c, &a->tsprt.sl_c);
+		a->tsprt.sc = path_text(a, a->tsprt.dim_s, a->tsprt.s, &a->tsprt.sl_s);
 	else
 	{
 		free(a->line);
-		free_all(a, "ERROR2", 1);
+		free_all(a, "ERROR\n", 1);
 	}
 }
 
 void	verif_pars(t_all *data)
 {
 	if (data->tmap.NO == NULL)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	else if (data->tmap.SO == NULL)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	if (data->tmap.WE == NULL)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	else if (data->tmap.EA == NULL)
-		free_all(data, "ERROR", 1);
-	if (data->tsprt.S == NULL)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
+	if (data->tsprt.sc == NULL)
+		free_all(data, "ERROR\n", 1);
 	else if (data->twdw.width < 0)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	if (data->twdw.height < 0)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	else if (data->tmap.F < 0)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 	else if (data->tmap.C < 0)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR\n", 1);
 }

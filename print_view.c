@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:36:06 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 12:50:49 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 20:21:10 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void			view(t_all *data, double v, int *color)
 
 	i = 0;
 	add = -M_PI / 6;
-	if (!(data->tsprt.wray =
-	malloc(sizeof(double) * data->twdw.width)))
-		free_all(data, "ERROR", 1);
 	while (i < data->twdw.width)
 	{
 		v = trigo_pi(data->tchar.view + add);

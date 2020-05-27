@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:29:26 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 13:35:51 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/27 19:54:09 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static int	ratio_text(t_all *data, int x, int y, int pos_on_img)
 	ratio_y = (double)data->tsprt.dim_s[1] / data->twall.size;
 	pos_on_text = (int)(ratio_x * x) * 4 +
 	data->tsprt.sl_s * (int)(y * ratio_y);
-	if (!(ret = verif_black(data, pos_on_text, data->tsprt.S, x)))
+	if (!(ret = verif_black(data, pos_on_text, data->tsprt.sc, x)))
 	{
 		while (k < 4)
 		{
 			data->twdw.img_data[pos_on_img + k] =
-			data->tsprt.S[pos_on_text + k];
+			data->tsprt.sc[pos_on_text + k];
 			k++;
 		}
 	}
