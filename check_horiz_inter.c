@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:05:31 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/12 14:48:22 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 10:49:17 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void		check_next_horiz(t_all *data, int down, int right, double v)
 	posy = data->twall.y;
 	if (!down)
 		posy -= DIMENSION;
-	while (posx >= 0 && posx <= data->twall.size_x
-	&& posy >= 0 && posy <= data->twall.size_y)
+	while (posx >= 0 && posx < data->twall.size_x
+	&& posy >= 0 && posy < data->twall.size_y)
 	{
 		if (define_position_wall_horiz(data, posx, posy, v))
 			break ;

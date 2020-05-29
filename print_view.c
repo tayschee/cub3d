@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:36:06 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 20:21:10 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 15:18:02 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ void			view(t_all *data, double v, int *color)
 		check_vertical(data, data->tchar.x, data->tchar.y, v);
 		data->twall.horiz = closest_wall(data);
 		data->tsprt.wray[i] = data->twall.hyp * cos(add);
-		print3d(data, i, v);
-		if (data->twdw.print_map == 1)
-			print_view_minimap(data, add, v, color);
+		if (data->twdw.print_map == 0)
+			print3d(data, i, v);
 		add += (M_PI / 3) / data->twdw.width;
 		i++;
 	}
+	if (data->twdw.print_map == 1)
+		minimap(data, add, data->tsprt.wray, color);
+	else
+		free(color);
+
 }

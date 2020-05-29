@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:29:26 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 19:54:09 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 20:30:34 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,28 @@ double sprite_size)
 	int x;
 	int y;
 	int pos_on_img;
-	int wall;
 
 	x = left < 0 ? -left : 0;
+	x = x < 0 ? 0 : x;
 	data->tsprt.left = left;
 	data->twall.size = sprite_size;
-	wall = data->tsprt.wray[left] < data->tvsprt->dist ? 1 : 0;
-	while (x < sprite_size && x + left < data->twdw.width)
+	if (data->tvsprt->dist >= 1)
 	{
-		y = top < 0 ? -top : 0;
-		while (y < sprite_size && y + top < data->twdw.height)
+		while (x < sprite_size && x + left < data->twdw.width)
 		{
-			pos_on_img = (x + left) * 4 + data->twdw.size_line
-			* (y + top);
-			if (ratio_text(data, x, y, pos_on_img) < 0 && !wall)
-				return ;
-			y++;
+			if (x + left >= 0)
+			{
+				y = top < 0 ? -top : 0;
+				while (y < sprite_size && y + top < data->twdw.height)
+				{
+					pos_on_img = (x + left) * 4 + data->twdw.size_line
+					* (y + top);
+					ratio_text(data, x, y, pos_on_img);
+					y++;
+				}
+			}
+			x++;
 		}
-		x++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 19:41:34 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 15:19:36 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 # include "./libft/libft.h" 
 # include "math.h"
 
-# define UP 13
-# define DOWN 1
-# define LEFT 0
-# define RIGHT 2
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
 
-# define ROTATE_LEFT 123
-# define ROTATE_RIGHT 124
+# define ROTATE_LEFT 65361
+# define ROTATE_RIGHT 65363
 
-# define ESC 53
-# define TAB 48
+# define ESC 65307
+# define TAB 65289
 
 # define RED 16711680
 # define GREEN 2088960
@@ -195,10 +195,7 @@ void	print3d(t_all *data, int x, double angle);
 double 	pos_text(t_all *data);
 int	apply_text(t_all *data, double proj_wall, double start_text , int y);
 
-void	print_view_minimap(t_all *data, double add, double v, int *color);
-int	minimap(t_all *data);
-
-void	what_user_do(t_all *data);
+int	minimap(t_all *data, double add, double *ray, int *color);
 //trier jusque la
 //void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
 

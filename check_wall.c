@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 13:00:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/10 12:23:07 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 20:24:12 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,22 @@ char	what_case(t_all *data, double x, double y)
 
 int		check_player_position(t_all *data, double vx, double vy)
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
+	double	angle;
 
 	data->tchar.vx = vx;
 	data->tchar.vy = vy;
+	angle = -M_PI / 2;
 	x = data->tchar.x + vx;
 	y = data->tchar.y + vy;
-	if (data->tmap.map[(int)(y + DIMENSION_PLAYER / 2) / DIMENSION]
-	[(int)(x + DIMENSION_PLAYER / 2) / DIMENSION] == '1')
-		return (0);
+	while (angle < M_PI / 2)
+	{
+		if (data->tmap.map[(int)(y + (DIMENSION_PLAYER / 2) * sin(angle)) / DIMENSION]
+		[(int)(x + (DIMENSION_PLAYER / 2) * cos(angle)) / DIMENSION] == '1')
+			return (0);
+		angle += M_PI / 6;
+	}
 	data->tchar.x = x;
 	data->tchar.y = y;
 	data->tchar.vvx = vx;

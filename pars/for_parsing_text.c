@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:14:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 20:19:06 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 15:09:06 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ static int		color(char	*line, t_all *data) //a refaire ou texture sol ciel
 }
 
 static char		*path_text(t_all *data,
-int dim[2], void *dir, int *size_line) //verif .cub
+int dim[2], void **dir, int *size_line)
 {
 	char	**text;
 	char	*ret;
 
 	text = ft_split(data->line, ' ');
-	if (!(dir = mlx_xpm_file_to_image(
+	if (!(*dir = mlx_xpm_file_to_image(
 	data->twdw.ptr, text[1], &data->twall.width, &data->twall.height)))
 	{
 		free(data->line);
@@ -85,7 +85,7 @@ int dim[2], void *dir, int *size_line) //verif .cub
 		free_all(data, "ERROR\n", 1);
 	}
 	free_malloc_2d(text);
-	ret = mlx_get_data_addr(dir, &data->twdw.bpp, size_line, &data->twdw.end);
+	ret = mlx_get_data_addr(*dir, &data->twdw.bpp, size_line, &data->twdw.end);
 	dim[0] = data->twall.width;
 	dim[1] = data->twall.height;
 	return (ret);
@@ -94,13 +94,13 @@ int dim[2], void *dir, int *size_line) //verif .cub
 void			for_parsing_text(t_all *a)
 {
 	if (!ft_strncmp(a->line, "NO ", 3))
-		a->tmap.NO = path_text(a, a->tmap.dim_no, a->tmap.no, &a->twdw.sl_no);
+		a->tmap.NO = path_text(a, a->tmap.dim_no, &a->tmap.no, &a->twdw.sl_no);
 	else if (!ft_strncmp(a->line, "SO ", 3))
-		a->tmap.SO = path_text(a, a->tmap.dim_so, a->tmap.so, &a->twdw.sl_so);
+		a->tmap.SO = path_text(a, a->tmap.dim_so, &a->tmap.so, &a->twdw.sl_so);
 	else if (!ft_strncmp(a->line, "WE ", 3))
-		a->tmap.WE = path_text(a, a->tmap.dim_we, a->tmap.we, &a->twdw.sl_we);
+		a->tmap.WE = path_text(a, a->tmap.dim_we, &a->tmap.we, &a->twdw.sl_we);
 	else if (!ft_strncmp(a->line, "EA ", 3))
-		a->tmap.EA = path_text(a, a->tmap.dim_ea, a->tmap.ea, &a->twdw.sl_ea);
+		a->tmap.EA = path_text(a, a->tmap.dim_ea, &a->tmap.ea, &a->twdw.sl_ea);
 	else if (!ft_strncmp(a->line, "R ", 2))
 	{	
 		dimension_wdw(a->line, a);
@@ -112,7 +112,7 @@ void			for_parsing_text(t_all *a)
 	else if (!ft_strncmp(a->line, "C ", 2))
 		a->tmap.C = color(a->line, a);
 	else if (!ft_strncmp(a->line, "S ", 2))
-		a->tsprt.sc = path_text(a, a->tsprt.dim_s, a->tsprt.s, &a->tsprt.sl_s);
+		a->tsprt.sc = path_text(a, a->tsprt.dim_s, &a->tsprt.s, &a->tsprt.sl_s);
 	else
 	{
 		free(a->line);

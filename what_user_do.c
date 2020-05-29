@@ -6,19 +6,19 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:28:02 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 21:15:51 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/28 14:42:18 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		trigo(t_all *data)
+/*static void		trigo(t_all *data)
 {
 	if (data->tchar.view > 2 * M_PI)
 		data->tchar.view = data->tchar.view - 2 * M_PI;
 	if (data->tchar.view < 0)
 		data->tchar.view = 2 * M_PI + data->tchar.view;
-}
+}*/
 
 static void		choice_screen(t_all *data, int keycode)
 {
@@ -60,7 +60,7 @@ static int		input(int keycode, t_all *data)
 		data->tchar.view += ROTATE_SPEED;
 	if (keycode == ROTATE_LEFT)
 		data->tchar.view -= ROTATE_SPEED;
-	trigo(data);
+	trigo_pi(data->tchar.view);
 	data->tchar.vvx = cos(data->tchar.view);
 	data->tchar.vvy = sin(data->tchar.view);
 	what_case(data, data->tchar.x, data->tchar.y);

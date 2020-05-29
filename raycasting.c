@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:28:43 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 20:21:42 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/05/29 14:49:10 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ static void	print_screen(t_all *data)
 
 int			raycasting(t_all *data)
 {
+	
 	view(data, data->tchar.view, long_to_orgb(TGREY));
-	print_sprite(data);
+	if (data->twdw.print_map == 0)
+		print_sprite(data);
+	print_screen(data);
 	map_without_x(data);
 	free_tvsprt(data);
-	print_screen(data);
 	event(data);
-	what_user_do(data);
+//	what_user_do(data);
 	return (0);
 }
