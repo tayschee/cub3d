@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:27:58 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/08 15:35:58 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:58:10 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		free_all2(t_all *all)
 			free(all->twdw.ptr);
 		else
 			mlx_destroy_window(all->twdw.ptr, all->twdw.win);
-	}	
+	}
 	free(all);
 }
 

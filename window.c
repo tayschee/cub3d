@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 11:02:51 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/08 16:36:22 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:57:29 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static int		input(int keycode, t_all *data)
 
 void			window(char *map, t_all *data)
 {
-
 	data->twdw.ptr = mlx_init();
 	parsing(map, data);
-	data->twdw.img_ptr = mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height);
+	data->twdw.img_ptr = mlx_new_image(data->twdw.ptr, data->twdw.width,
+	data->twdw.height);
 	data->twdw.img_data =
 	mlx_get_data_addr(data->twdw.img_ptr, &data->twdw.bpp,
 	&data->twdw.size_line, &data->twdw.end);

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/03 18:20:56 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:51:18 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ typedef struct		s_all
 int					main(int c, char **v);
 
 t_all				*initialise_struct_all(int mode);
-void				free_all(t_all *all, char *msg, int i);
+void				free_all(t_all *all, char *msg, int i, int line);
 
 void				parsing(char *file_name, t_all *data);
 void				for_parsing_text(t_all *data);
@@ -195,7 +195,7 @@ int					apply_text(t_all *data, double proj_wall,
 int					minimap(t_all *data, double add, double *ray, int *color);
 
 void				screen(t_all *data);
-void				bit_map_pixel_data(int fd, t_all *data);
+void				bit_map_pixel_data(int fd, t_all *data, char *txt);
 
 char				what_case(t_all *data, double x, double y);
 int					check_player_position(t_all *data, double vx, double vy);
