@@ -1,0 +1,18 @@
+R 400 200
+NO /home/user42/Bureau/42/cub3d/resources/texture/greystone.xpm
+SO /home/user42/Bureau/42/cub3d/resources/texture/greystone.xpm
+WE /home/user42/Bureau/42/cub3d/resources/texture/greystone.xpm
+EA /home/user42/Bureau/42/cub3d/resources/texture/greystone.xpm
+S /home/user42/Bureau/42/cub3d/resources/sprite/pillar.xpm
+F 255,255,255
+C 127,48,70
+R 115 18
+
+                                                 1111
+11111111111111111111111                          1001
+10000000000000000000001                  1111    1001
+10000000010000001000001111111111111111111100111111001
+1E000000210000200100000000000000000000000000000000001
+10000000010000000000001111111111111111111111111111111
+10000000000000200000001
+11111111111111111111111

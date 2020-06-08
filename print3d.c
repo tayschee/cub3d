@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:44:40 by tbigot            #+#    #+#             */
-/*   Updated: 2020/03/12 18:32:39 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 19:08:32 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void		choice_text(t_all *data, int horiz, double angle)
 	if (horiz == 1)
 	{
 		data->twall.text = angle < M_PI ?
-		data->tmap.SO : data->tmap.NO;
+		data->tmap.soc : data->tmap.noc;
 		data->twall.size_line = angle < M_PI ?
 		data->twdw.sl_so : data->twdw.sl_no;
 		data->twall.width = angle < M_PI ?
@@ -73,7 +73,7 @@ static void		choice_text(t_all *data, int horiz, double angle)
 		return ;
 	}
 	i = angle > M_PI / 2 && angle < 3 * M_PI / 2 ? 1 : 0;
-	data->twall.text = i ? data->tmap.WE : data->tmap.EA;
+	data->twall.text = i ? data->tmap.wec : data->tmap.eac;
 	data->twall.size_line = i ? data->twdw.sl_we : data->twdw.sl_ea;
 	data->twall.width = i ? data->tmap.dim_we[0] : data->tmap.dim_ea[0];
 	data->twall.height = i ? data->tmap.dim_we[1] : data->tmap.dim_ea[1];
@@ -113,8 +113,8 @@ void			print3d(t_all *data, int x, double angle)
 	perp_dist = data->twall.hyp * cos(angle - data->tchar.view);
 	dist_proj = DIMENSION * data->twdw.width / (2 * tan(M_PI / (3 * 2)));
 	proj_wall = (DIMENSION / perp_dist) * dist_proj;
-	i = draw_sky(data, proj_wall, x, long_to_orgb(data->tmap.C));
+	i = draw_sky(data, proj_wall, x, long_to_orgb(data->tmap.cc));
 	choice_text(data, data->twall.horiz, angle);
 	i = draw_wall(data, proj_wall, x, i);
-	draw_ground(data, i, x, long_to_orgb(data->tmap.F));
+	draw_ground(data, i, x, long_to_orgb(data->tmap.fc));
 }

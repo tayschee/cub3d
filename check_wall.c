@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 13:00:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 20:24:12 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 15:32:57 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int		check_player_position(t_all *data, double vx, double vy)
 	y = data->tchar.y + vy;
 	while (angle < M_PI / 2)
 	{
-		if (data->tmap.map[(int)(y + (DIMENSION_PLAYER / 2) * sin(angle)) / DIMENSION]
-		[(int)(x + (DIMENSION_PLAYER / 2) * cos(angle)) / DIMENSION] == '1')
+		if (data->tmap.map[(int)(y + (DIMENSION_PLAYER / 2) * sin(angle)) /
+		DIMENSION][(int)(x + (DIMENSION_PLAYER / 2) * cos(angle))
+		/ DIMENSION] == '1')
 			return (0);
 		angle += M_PI / 6;
 	}

@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 14:21:10 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 15:37:26 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 17:22:22 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,33 @@ static int		*what_color(char c)
 	return (tab);
 }
 
-static void			print_view_minimap(t_all *data,
+static void		print_view_minimap(t_all *data,
 double add, double *ray, int *color)
 {
 	float	i;
 	int		k;
 	int		pos_view;
 	double	v;
-	
-	(void)add;
-	i = 0;
-	k = 0;
+	double	j;
+
 	v = trigo_pi(data->tchar.view - M_PI / 6);
-	add = data->twdw.dim_mini /  M_PI/ 6; 
-//	while (ray && *ray)
-//	{		
-		while (i < *ray)
+	j = 0;
+	while (j < data->twdw.width)
+	{
+		i = 0;
+		while (i <= ray[(int)j])
 		{
-			pos_view = (int)(data->tchar.x * data->twdw.dim_mini + i
-			* cos(v)) * 4 + data->twdw.size_line * (int)(data->tchar.y
-			* data->twdw.dim_mini + i * sin(v));
+			pos_view = (int)((data->tchar.x + i * cos(v)) * data->twdw.dim_mini)
+			* 4 + data->twdw.size_line * (int)((data->tchar.y + i * sin(v))
+			* data->twdw.dim_mini);
 			k = -1;
 			while (++k < 4)
 				data->twdw.img_mn_data[pos_view + k] = color[3 - k];
-			i += 1;
+			i += 0.01;
 		}
-//		v = trigo_pi(v + add);
-//		ray++;
-//	}
-//	free(color);
+		j++;
+		v = trigo_pi(v + add);
+	}
 }
 
 static void		print_circle(t_all *data, int *orgb, int ray, int dim)
@@ -126,9 +124,6 @@ int				minimap(t_all *data, double add, double *ray, int *color)
 
 	i = 0;
 	y = 0;
-	(void)add;
-	(void)ray;
-	(void)color;
 	while (data->tmap.map[i])
 	{
 		j = 0;

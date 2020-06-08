@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:07:17 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 10:46:02 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/01 16:08:13 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static int		define_position_wall_vert(t_all *data,
 double posx, double posy, double angle)
 {
-	if (what_case(data, posx, posy) == '2' ||
-	what_case(data, posx, posy) == '4')
+	if (what_case(data, posx, posy) == '2')
 		sprite(data, posx, posy, angle);
-	if (what_case(data, posx, posy) == '1'
-	|| what_case(data, posx, posy) == '3')
+	if (what_case(data, posx, posy) == '1')
 		return (1);
 	return (0);
 }

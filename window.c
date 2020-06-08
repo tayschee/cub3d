@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 11:02:51 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/28 17:41:46 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/05 18:21:30 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static int		input(int keycode, t_all *data)
 		check_player_position(data, SPEED * cos(data->tchar.view),
 		SPEED * sin(data->tchar.view));
 	if (keycode == DOWN)
-		check_player_position(data,	SPEED * -1 * cos(data->tchar.view),
+		check_player_position(data, -SPEED * cos(data->tchar.view),
 		SPEED * -1 * sin(data->tchar.view));
 	if (keycode == LEFT)
-		check_player_position(data,	SPEED * -1 *  cos(data->tchar.view + M_PI / 2), SPEED * -1
-		* sin(data->tchar.view + M_PI / 2));
+		check_player_position(data, -SPEED * cos(data->tchar.view + M_PI / 2),
+		SPEED * -1 * sin(data->tchar.view + M_PI / 2));
 	if (keycode == RIGHT)
-		check_player_position(data, SPEED * cos(data->tchar.view + M_PI / 2), SPEED
-		* sin(data->tchar.view + M_PI / 2));
+		check_player_position(data, SPEED * cos(data->tchar.view + M_PI / 2),
+		SPEED * sin(data->tchar.view + M_PI / 2));
 	if (keycode == ROTATE_RIGHT)
 		data->tchar.view += ROTATE_SPEED;
 	if (keycode == ROTATE_LEFT)
@@ -57,14 +57,14 @@ static int		input(int keycode, t_all *data)
 	return (keycode);
 }
 
-
-void	window(char *map, t_all *data)
+void			window(char *map, t_all *data)
 {
+
 	data->twdw.ptr = mlx_init();
 	parsing(map, data);
-	data->twdw.win = mlx_new_window(data->twdw.ptr, data->twdw.width
-	, data->twdw.height, "Cub3D");
-	data->twdw.img_ptr =
+	data->twdw.win = mlx_new_window(data->twdw.ptr, data->twdw.width,
+	data->twdw.height, "Cub3D");
+	implement_text(data, &data->twdw.bpp, &data->twdw.end);
 	mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height);
 	data->twdw.img_data =
 	mlx_get_data_addr(data->twdw.img_ptr, &data->twdw.bpp,

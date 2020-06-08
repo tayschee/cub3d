@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:20 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 15:19:36 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 18:20:56 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include <fcntl.h>
 # include <stdio.h>
-# include <mlx.h> 
+# include <mlx.h>
 # include <string.h>
 # include <errno.h>
-# include "./libft/libft.h" 
+# include "./libft/libft.h"
 # include "math.h"
 
 # define UP 119
@@ -40,25 +40,23 @@
 # define YELLOW 16776960
 # define GREY 13882323
 # define PURPLE 8388736
-# define TGREY 2144588755
-
+# define TGREY 3372220415
 
 # define DIMENSION 1
-# define EYE 1 / 2
+# define EYE 0.5
 # define DIMENSION_PLAYER 0.2
 # define DIMENSION_SPRITE 1
 # define RATIO 3
 
 # define SPEED 0.1
-# define ROTATE_SPEED M_PI/24
-
+# define ROTATE_SPEED 0.1308
 
 typedef	struct		s_wdw
 {
 	void			*ptr;
 	void			*win;
 	int				height;
-	int			    width;
+	int				width;
 	int				bpp;
 	int				size_line;
 	int				end;
@@ -70,10 +68,10 @@ typedef	struct		s_wdw
 	int				y;
 	int				dim_mini;
 	int				print_map;
-	int			sl_no;
-	int			sl_so;
-	int			sl_we;
-	int			sl_ea;
+	int				sl_no;
+	int				sl_so;
+	int				sl_we;
+	int				sl_ea;
 }					t_wdw;
 
 typedef struct		s_map
@@ -82,17 +80,17 @@ typedef struct		s_map
 	void			*so;
 	void			*we;
 	void			*ea;
-	char			*NO;
-	char			*SO;
-	char			*WE;
-	char			*EA;
-	int				F;
-	int				C;
+	char			*noc;
+	char			*soc;
+	char			*wec;
+	char			*eac;
+	int				fc;
+	int				cc;
 	char			**map;
-	int			dim_no[2];
-	int			dim_so[2];
-	int			dim_we[2];
-	int			dim_ea[2];
+	int				dim_no[2];
+	int				dim_so[2];
+	int				dim_we[2];
+	int				dim_ea[2];
 }					t_map;
 
 typedef struct		s_wall
@@ -102,14 +100,14 @@ typedef struct		s_wall
 	double			xbis;
 	double			ybis;
 	double			hyp;
-	int			size_x;
-	int			size_y;
+	int				size_x;
+	int				size_y;
 	int				horiz;
 	double			size;
 	char			*text;
-	int			size_line;
-	int			width;
-	int			height;
+	int				size_line;
+	int				width;
+	int				height;
 }					t_wall;
 
 typedef	struct		s_char
@@ -123,33 +121,31 @@ typedef	struct		s_char
 	double			y;
 	float			dim;
 	double			ray;
-	
 }					t_char;
 
 typedef struct		s_sprt
 {
 	void			*s;
 	char			*sc;
-	int			sl_s;
-	int			dim_s[2];
-	int			beg;
+	int				sl_s;
+	int				dim_s[2];
+	int				beg;
 	double			*wray;
-	int			left;
-}			t_sprt;
+	int				left;
+}					t_sprt;
 
 typedef struct		s_vsprt
 {
-	
-	double		x;
-	double		y;
-	double		dist_x;
-	double		dist_y;
-	char		c;
-	double		dist;
-	double		angle;
+	double			x;
+	double			y;
+	double			dist_x;
+	double			dist_y;
+	char			c;
+	double			dist;
+	double			angle;
 	struct s_vsprt	*next;
 
-}			t_vsprt;
+}					t_vsprt;
 
 typedef struct		s_all
 {
@@ -163,58 +159,50 @@ typedef struct		s_all
 	int				mode;
 }					t_all;
 
-int		main(int c, char **v);
+int					main(int c, char **v);
 
-t_all	*initialise_struct_all(int mode);
-void	free_all(t_all *all, char *msg, int i);
+t_all				*initialise_struct_all(int mode);
+void				free_all(t_all *all, char *msg, int i);
 
-void	parsing(char *file_name, t_all *data);
-void	for_parsing_text(t_all *data);
-void	verifmap(t_all *data);
-void	verif_pars(t_all *data);
-void	check_void(t_all *data, int i, int j);
-void	add_space(t_all *data);
-void	define_dimension(t_all *data, int map_w, int map_h);
+void				parsing(char *file_name, t_all *data);
+void				for_parsing_text(t_all *data);
+void				verifmap(t_all *data);
+void				verif_pars(t_all *data);
+void				check_void(t_all *data, int i, int j);
+void				add_space(t_all *data);
+void				define_dimension(t_all *data, int map_w, int map_h);
 
-void	window(char *map, t_all *data);
+void				window(char *map, t_all *data);
 
-int	raycasting(t_all *data);
-void	view(t_all *data, double v, int *color);
+int					raycasting(t_all *data);
+void				view(t_all *data, double v, int *color);
 
-void	check_horizontal(t_all *data, double x, double y, double v);
-void	check_vertical(t_all *data, double x, double y, double v);
+void				check_horizontal(t_all *data, double x, double y, double v);
+void				check_vertical(t_all *data, double x, double y, double v);
 
-void	sprite(t_all *data, int posx, int posy, double v);
-void	closest_sprite_to_further(t_all *data);
-void	map_without_x(t_all *data);
-void	free_tvsprt(t_all *data);
+void				sprite(t_all *data, int posx, int posy, double v);
+void				closest_sprite_to_further(t_all *data);
+void				map_without_x(t_all *data);
+void				free_tvsprt(t_all *data);
 
-void	print_sprite(t_all *data);
+void				print_sprite(t_all *data);
 
-void	print3d(t_all *data, int x, double angle);
-double 	pos_text(t_all *data);
-int	apply_text(t_all *data, double proj_wall, double start_text , int y);
+void				print3d(t_all *data, int x, double angle);
+double				pos_text(t_all *data);
+int					apply_text(t_all *data, double proj_wall,
+					double start_text, int y);
 
-int	minimap(t_all *data, double add, double *ray, int *color);
-//trier jusque la
-//void	define_square(t_all *data, int *ORGB, int x, int y, int dimension);
+int					minimap(t_all *data, double add, double *ray, int *color);
 
-//void player_position_minimap(t_all *data);
+void				screen(t_all *data);
+void				bit_map_pixel_data(int fd, t_all *data);
 
-//int		*tab_int(int *tab, int c, int len);
+char				what_case(t_all *data, double x, double y);
+int					check_player_position(t_all *data, double vx, double vy);
 
-void	screen(t_all *data);
-void	bit_map_pixel_data(int fd, t_all *data);
-char	what_case(t_all *data, double x, double y);
-int		check_player_position(t_all *data, double vx, double vy);
+double				pythagore(double c1, double c2);
+int					*long_to_orgb(long int color);
+double				trigo_pi(double angle);
+int					verifchar(char c, char *valid);
 
-double	pythagore(double c1, double c2);
-int		*long_to_orgb(long int color);
-double	trigo_pi(double angle);
-int	verifchar(char c, char *valid);
-
-void	event(t_all *data);
-
-
-
-# endif
+#endif

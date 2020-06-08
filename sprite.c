@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:29:26 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 20:30:34 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 18:36:30 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,23 @@ double sprite_size)
 
 	x = left < 0 ? -left : 0;
 	x = x < 0 ? 0 : x;
+	x = 0;
 	data->tsprt.left = left;
 	data->twall.size = sprite_size;
-	if (data->tvsprt->dist >= 1)
+	while (x < sprite_size && x + left < data->twdw.width)
 	{
-		while (x < sprite_size && x + left < data->twdw.width)
+		if (x + left >= 0)
 		{
-			if (x + left >= 0)
+			y = top < 0 ? -top : 0;
+			while (y < sprite_size && y + top < data->twdw.height)
 			{
-				y = top < 0 ? -top : 0;
-				while (y < sprite_size && y + top < data->twdw.height)
-				{
-					pos_on_img = (x + left) * 4 + data->twdw.size_line
-					* (y + top);
-					ratio_text(data, x, y, pos_on_img);
-					y++;
-				}
+				pos_on_img = (x + left) * 4 + data->twdw.size_line
+				* (y + top);
+				ratio_text(data, x, y, pos_on_img);
+				y++;
 			}
-			x++;
 		}
+		x++;
 	}
 }
 
@@ -98,11 +96,11 @@ static void	define_position_sprite_on_window(t_all *data)
 		sprite_dir -= 2 * M_PI;
 	while (sprite_dir - data->tchar.view < -M_PI)
 		sprite_dir += 2 * M_PI;
-	data->tvsprt->dist *= cos(sprite_dir - data->tchar.view);
+	data->tvsprt->dist *= cos((sprite_dir - data->tchar.view));
 	sprite_size = data->twdw.width / data->tvsprt->dist;
+	left_sprt = tan(sprite_dir - data->tchar.view)
+	* data->twdw.width / (M_PI / 3) + (data->twdw.width / 2 - sprite_size / 2);
 	top_sprt = data->twdw.height / 2 - sprite_size / 2;
-	left_sprt = (sprite_dir - data->tchar.view) * (M_PI / 3)
-	* (data->twdw.width) + (data->twdw.width / 2 - sprite_size / 2);
 	apply_sprite_text(data, top_sprt, left_sprt, sprite_size);
 }
 

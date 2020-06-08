@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:37:08 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 19:44:17 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/03 19:05:35 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static t_map	initialise_struct_map(void)
 	map.so = NULL;
 	map.we = NULL;
 	map.ea = NULL;
-	map.NO = NULL;
-	map.SO = NULL;
-	map.WE = NULL;
-	map.EA = NULL;
-	map.F = -1;
-	map.C = -1;
+	map.noc = NULL;
+	map.soc = NULL;
+	map.wec = NULL;
+	map.eac = NULL;
+	map.fc = -1;
+	map.cc = -1;
 	map.map = NULL;
 	map.dim_no[0] = 0;
 	map.dim_no[1] = 0;
