@@ -6,13 +6,13 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:28:23 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 12:28:28 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:47:24 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	bit_map_pixel_data(int fd, t_all *data)
+void	bit_map_pixel_data(int fd, t_all *data, char *txt)
 {
 	int pos_on_img;
 	int x;
@@ -29,12 +29,13 @@ void	bit_map_pixel_data(int fd, t_all *data)
 			k = 0;
 			while (k < 4)
 			{
-				write(fd,
-				&data->twdw.img_data[pos_on_img + k], 1);
+				txt[pos_on_img + k] = data->twdw.img_data[pos_on_img + k];
 				k++;
 			}
 			x++;
 		}
 		y--;
 	}
+	write(fd, txt, data->twdw.width * 4 + data->twdw.size_line
+	* data->twdw.height);
 }

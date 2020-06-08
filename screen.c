@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:29:01 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/27 12:29:18 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:53:26 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,15 @@ static void		bit_map_in_fo_header(int fd, int width, int height)
 void			screen(t_all *data)
 {
 	int fd;
+	char *txt;
 
-	(void)data;
 	fd = open("screen/Cub3D.bmp", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	bit_map_file_header(fd);
 	bit_map_in_fo_header(fd, data->twdw.width, data->twdw.height);
-	bit_map_pixel_data(fd, data);
+	if (!(txt = ft_calloc(data->twdw.width * 4 +
+	data->twdw.size_line * data->twdw.height + 1, sizeof(char))))
+		free_all(data, "ERROR\n", 1, 0);
+	bit_map_pixel_data(fd, data, txt);
 	close(fd);
-	free_all(data, "ERROR", 0);
+	free_all(data, "ERROR", 0, 0);
 }

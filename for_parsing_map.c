@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:53:48 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/05 11:21:39 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 15:44:05 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static void		validchar(char *line, char *accept, t_all *data, int y)
 		|| line[i] == 'E' || line[i] == 'W')
 		{
 			if (data->tchar.view != -1)
-				free_all(data, "Error", 1);
+				free_all(data, "Error", 1, 0);
 			position_player(line[i], i, y, data);
 		}
 		while (accept[++j] != line[i])
 		{
 			if (accept[j] != line[i] && accept[j + 1] == '\0')
-				free_all(data, "Error", 1);
+				free_all(data, "Error", 1, 0);
 		}
 	}
 }
@@ -80,7 +80,7 @@ void			verifmap(t_all *data)
 		i++;
 	}
 	if (data->tchar.view == -1)
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 	validchar(data->tmap.map[i], " 1", data, i);
 	define_dimension(data, data->twall.size_x, data->twall.size_y);
 }

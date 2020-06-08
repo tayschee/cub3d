@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:29:58 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/05 11:22:21 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 15:44:56 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	check_void(t_all *data, int i, int j)
 {
 	if (j > 0 && data->tmap.map[j - 1][i] != ' '
 	&& data->tmap.map[j - 1][i] != '1')
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 	if (data->tmap.map[j + 1] && data->tmap.map[j + 1][i] != ' '
 	&& data->tmap.map[j + 1][i] != '1')
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 	if (i > 0 && data->tmap.map[j][i - 1] != ' '
 	&& data->tmap.map[j][i - 1] != '1')
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 	if (data->tmap.map[j][i + 1] != '\0'
 	&& data->tmap.map[j][i + 1] != ' '
 	&& data->tmap.map[j][i + 1] != '1')
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 }
 
 void	add_space(t_all *data)
@@ -44,7 +44,7 @@ void	add_space(t_all *data)
 		{
 			size = data->twall.size_x - size;
 			if (!(new = malloc((size + 1) * sizeof(char))))
-				free_all(data, "ERROR", 1);
+				free_all(data, "ERROR", 1, 0);
 			new[size] = 0;
 			tmp = ft_strjoin(data->tmap.map[i], ft_memset(new, ' ', size));
 			free(new);

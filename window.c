@@ -6,7 +6,7 @@
 /*   By: tbigot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 11:02:51 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/05 18:21:30 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 16:36:22 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		quit_mouse(t_all *data)
 {
-	free_all(data, "ERROR", 0);
+	free_all(data, "ERROR", 0, 0);
 	return (0);
 }
 
@@ -32,7 +32,7 @@ static void		choice_screen(t_all *data, int keycode)
 static int		input(int keycode, t_all *data)
 {
 	if (keycode == ESC)
-		free_all(data, "ERROR", 0);
+		free_all(data, "ERROR", 0, 0);
 	choice_screen(data, keycode);
 	if (keycode == UP)
 		check_player_position(data, SPEED * cos(data->tchar.view),
@@ -62,10 +62,7 @@ void			window(char *map, t_all *data)
 
 	data->twdw.ptr = mlx_init();
 	parsing(map, data);
-	data->twdw.win = mlx_new_window(data->twdw.ptr, data->twdw.width,
-	data->twdw.height, "Cub3D");
-	implement_text(data, &data->twdw.bpp, &data->twdw.end);
-	mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height);
+	data->twdw.img_ptr = mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height);
 	data->twdw.img_data =
 	mlx_get_data_addr(data->twdw.img_ptr, &data->twdw.bpp,
 	&data->twdw.size_line, &data->twdw.end);
@@ -73,6 +70,8 @@ void			window(char *map, t_all *data)
 	mlx_new_image(data->twdw.ptr, data->twdw.width, data->twdw.height);
 	data->twdw.img_mn_data = mlx_get_data_addr(data->twdw.img_mn_ptr,
 	&data->twdw.bpp, &data->twdw.size_line, &data->twdw.end);
+	data->twdw.win = mlx_new_window(data->twdw.ptr, data->twdw.width,
+	data->twdw.height, "Cub3D");
 	mlx_loop_hook(data->twdw.ptr, raycasting, data);
 	mlx_hook(data->twdw.win, 17, 1L << 17, quit_mouse, data);
 	mlx_hook(data->twdw.win, 2, 1, input, data);

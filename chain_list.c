@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:27:07 by tbigot            #+#    #+#             */
-/*   Updated: 2020/05/29 10:49:49 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 15:41:25 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		sprite(t_all *data, int posx, int posy, double v)
 	sprt = NULL;
 	end_of_tvsprt(data, &sprt);
 	if (!(new = malloc(sizeof(t_vsprt))))
-		free_all(data, "ERROR", 1);
+		free_all(data, "ERROR", 1, 0);
 	new->x = posx / DIMENSION + (double)(DIMENSION) / 2;
 	new->y = (int)(posy / DIMENSION) + (double)(DIMENSION) / 2;
 	new->dist_x = data->tchar.x - new->x;

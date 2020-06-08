@@ -6,7 +6,7 @@
 /*   By: tbigot <tbigot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 12:27:58 by tbigot            #+#    #+#             */
-/*   Updated: 2020/06/05 14:03:12 by tbigot           ###   ########.fr       */
+/*   Updated: 2020/06/08 15:35:58 by tbigot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,26 @@ static void		free_all2(t_all *all)
 		free(all->tsprt.wray);
 	if (all->tvsprt)
 		free_tvsprt(all);
+	if (all->twdw.ptr)
+	{
+		if (!all->twdw.win)
+			free(all->twdw.ptr);
+		else
+			mlx_destroy_window(all->twdw.ptr, all->twdw.win);
+	}	
 	free(all);
 }
 
-void			free_all(t_all *all, char *msg, int i)
+void			free_all(t_all *all, char *msg, int i, int line)
 {
-	printf("oh\n");
 	if (all)
 	{
+		if (line)
+			free(all->line);
 		if (all->twdw.img_ptr)
 			mlx_destroy_image(all->twdw.ptr, all->twdw.img_ptr);
 		if (all->twdw.img_mn_ptr)
 			mlx_destroy_image(all->twdw.ptr, all->twdw.img_mn_ptr);
-		if (all->twdw.ptr)
-		{
-			if (!all->twdw.win)
-			{
-				printf("salut\n");
-			//	all->twdw.win = mlx_new_window(all->twdw.ptr, 50, 50, "Cub3d");
-			}
-			mlx_destroy_window(all->twdw.ptr, all->twdw.win);
-		}
-		printf("ou\n");
 		if (all->tmap.no)
 			mlx_destroy_image(all->twdw.ptr, all->tmap.no);
 		if (all->tmap.so)
